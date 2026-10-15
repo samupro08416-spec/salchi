@@ -7,7 +7,7 @@ head = '''<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#fde7ef">
-<meta name="description" content="Salchi y los lirios: juegos 3D para Ashlyn.">
+<meta name="description" content="Salchi y los lirios: juegos 3D con Salchi, Miso, Rocco y Samu.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -26,6 +26,9 @@ if ('serviceWorker' in navigator) window.addEventListener('load', () => navigato
 </body>
 </html>
 '''
+# La web pública no lleva la dedicatoria (se queda solo en el enlace de Claude de Ashlyn)
+src, n = re.subn(r'\s*<p class="ribbon">.*?</p>', '', src, flags=re.S)
+assert n == 1, 'no se encontró la dedicatoria'
 out = pathlib.Path(sys.argv[2])
 out.write_text(head + src + tail)
 print('ok', out, len(head + src + tail))
