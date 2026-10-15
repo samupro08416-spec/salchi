@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#fde7ef">
+<meta name="salchi-version" content="20261016015842">
 <meta name="description" content="Salchi y los lirios: juegos 3D con Salchi, Miso, Rocco y Samu.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
@@ -107,6 +108,8 @@
   button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 .hint { font-size: 12px; opacity: .6; }
   .games strong { font-size: 18px; }
+  .update { display: grid; gap: 6px; }
+  .card .update p, .menu .update p { text-align: center; font-size: 12.5px; margin: 0; }
   .savebox { position: relative; z-index: 1; text-align: left; background: #fdf0f4; border-radius: 16px; padding: 10px 12px; font-size: 13px; }
   .savebox summary { cursor: pointer; font-weight: 800; list-style: none; text-align: center; }
   .savebox summary::-webkit-details-marker { display: none; }
@@ -215,7 +218,8 @@
   .tab { border: 0; background: transparent; font: 800 13.5px var(--body); color: var(--ink); padding: 9px 4px; border-radius: 12px; cursor: pointer; transition: background .15s, box-shadow .15s, color .15s; }
   .tab[aria-selected="true"] { background: #fff; color: #d9577f; box-shadow: 0 2px 0 #efbccd, 0 5px 12px rgba(201,107,142,.25); }
   .panel { overflow-y: auto; min-height: 0; display: grid; gap: 12px; align-content: start; padding: 4px 2px 6px; -webkit-overflow-scrolling: touch; }
-  .gcards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .gcards { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .gcard[aria-pressed="true"] .gico { width: 54px; height: 54px; }
   .gcard {
     position: relative; border: 0; border-radius: 22px; padding: 10px 10px 12px; text-align: left; cursor: pointer; color: var(--ink);
     display: grid; gap: 3px; background: linear-gradient(160deg, #ffffff 0%, #fbe5ed 100%);
@@ -320,7 +324,7 @@
 
     <div class="panel" id="panel-game" role="tabpanel" aria-labelledby="tab-game">
       <div class="gcards">
-        <button class="gcard" id="game-lily" aria-pressed="true">
+        <button class="gcard" id="game-lily" aria-pressed="false" hidden>
           <svg class="gico" viewBox="0 0 48 48" aria-hidden="true"><g transform="translate(24 22)"><path class="p1" d="M0-17c4 5 4 11 0 15-4-4-4-10 0-15z"/><path class="p2" d="M0-17c4 5 4 11 0 15-4-4-4-10 0-15z" transform="rotate(60)"/><path class="p1" d="M0-17c4 5 4 11 0 15-4-4-4-10 0-15z" transform="rotate(120)"/><path class="p2" d="M0-17c4 5 4 11 0 15-4-4-4-10 0-15z" transform="rotate(180)"/><path class="p1" d="M0-17c4 5 4 11 0 15-4-4-4-10 0-15z" transform="rotate(240)"/><path class="p2" d="M0-17c4 5 4 11 0 15-4-4-4-10 0-15z" transform="rotate(300)"/><circle class="c" r="3.4"/></g><path class="st" d="M24 30v15"/></svg>
           <strong>Lluvia de lirios</strong><small>Atrapa las flores que caen</small>
           <span class="rec">Récord <b id="recLily">0</b></span>
@@ -376,6 +380,10 @@
         <div class="saverow"><input id="pasteCode" placeholder="Pega aquí tu código" aria-label="Pegar código de progreso" autocomplete="off"><button class="mini" id="loadCode">Recuperar</button></div>
         <p class="saveMsg" id="saveMsg" role="status"></p>
       </details>
+      <div class="update" id="updateBox" hidden>
+        <button class="musicline" id="checkUpdate">↻ Buscar actualización</button>
+        <p class="saveMsg" id="updateMsg" role="status"></p>
+      </div>
       <div class="hint" id="hint">En ordenador: ← → o A / D</div>
     </div>
 
@@ -1203,17 +1211,9 @@
   try { music.on = localStorage.getItem('salchi-lirios-music') !== 'off'; } catch (e) {}
   // La canción del juego de los lirios se graba primero; la de la ciudad, justo después
   try {
-    renderTrack(TRACKS.lily, (uri, len) => {
-      const tr = music.tracks.lily; tr.el.src = uri; tr.ready = true; tr.length = len;
+    renderTrack(TRACKS.city, (uri2, len2) => {
+      const tc = music.tracks.city; tc.el.src = uri2; tc.ready = true; tc.length = len2;
       if (music.want) playMusic();
-      setTimeout(() => {
-        try {
-          renderTrack(TRACKS.city, (uri2, len2) => {
-            const tc = music.tracks.city; tc.el.src = uri2; tc.ready = true; tc.length = len2;
-            if (music.want) playMusic();
-          });
-        } catch (e) {}
-      }, 200);
     });
   } catch (e) {}
 
@@ -1909,27 +1909,27 @@
   const SKINS = {
     dog: [
       { id: 'clasico', name: 'Clásico', colors: { coat: '#b9784a', dark: '#7a4a2e', light: '#e3b48d', accent: '#f39bbb' }, acc: null, req: null },
-      { id: 'choco', name: 'Chocolate', colors: { coat: '#6e4630', dark: '#4a2c1d', light: '#d9b08c', accent: '#c9a7f0' }, acc: 'flowers', clothes: [['sweater', { c: '#c9a7f0', s: '#ffffff' }]], desc: 'jersey de lana lila y corona de flores', req: { mode: 'lily', n: 30 } },
-      { id: 'algodon', name: 'Algodón de azúcar', colors: { coat: '#f6bfd3', dark: '#e893b3', light: '#fff4f8', accent: '#9fd8c9' }, acc: 'glasses', clothes: [['tutu', { c: '#ffb3cf' }], ['boots', { c: '#ffffff' }]], desc: 'tutú rosa, botitas blancas y gafitas', req: { mode: 'city', n: 30 } },
-      { id: 'real', name: 'Real', colors: { coat: '#f1d7a8', dark: '#d9b27a', light: '#fff6e6', accent: '#f39bbb' }, acc: 'crown', clothes: [['cape', { c: '#c8324b' }], ['bowtie', { c: '#2b2b4a' }]], desc: 'capa real, pajarita y corona', req: { mode: 'any', n: 60 } }
+      { id: 'choco', name: 'Chocolate', colors: { coat: '#6e4630', dark: '#4a2c1d', light: '#d9b08c', accent: '#c9a7f0' }, acc: 'flowers', clothes: [['sweater', { c: '#c9a7f0', s: '#ffffff' }]], desc: 'jersey de lana lila y corona de flores', req: { mode: 'city', n: 20 } },
+      { id: 'algodon', name: 'Algodón de azúcar', colors: { coat: '#f6bfd3', dark: '#e893b3', light: '#fff4f8', accent: '#9fd8c9' }, acc: 'glasses', clothes: [['tutu', { c: '#ffb3cf' }], ['boots', { c: '#ffffff' }]], desc: 'tutú rosa, botitas blancas y gafitas', req: { mode: 'city', n: 40 } },
+      { id: 'real', name: 'Real', colors: { coat: '#f1d7a8', dark: '#d9b27a', light: '#fff6e6', accent: '#f39bbb' }, acc: 'crown', clothes: [['cape', { c: '#c8324b' }], ['bowtie', { c: '#2b2b4a' }]], desc: 'capa real, pajarita y corona', req: { mode: 'city', n: 60 } }
     ],
     cat: [
       { id: 'nieve', name: 'Nieve', colors: { coat: '#fffaf7', accent: '#f39bbb' }, acc: null, req: null },
-      { id: 'lavanda', name: 'Lavanda', colors: { coat: '#dccbf3', accent: '#f6a7c7' }, acc: 'flowers', clothes: [['tutu', { c: '#efe2ff' }], ['pearls', {}]], desc: 'tutú lavanda, collar de perlas y corona de flores', req: { mode: 'lily', n: 30 } },
-      { id: 'fresita', name: 'Fresita', colors: { coat: '#f9c3d2', accent: '#ffffff' }, acc: 'glasses', clothes: [['hoodie', { c: '#ff6f86', s: '#ffffff' }]], desc: 'sudadera de fresa con capucha y gafitas', req: { mode: 'city', n: 30 } },
-      { id: 'princesa', name: 'Princesa', colors: { coat: '#fff1d6', accent: '#c9a7f0' }, acc: 'crown', clothes: [['cape', { c: '#a77fe6' }], ['pearls', {}]], desc: 'capa de princesa, perlas y corona', req: { mode: 'any', n: 60 } }
+      { id: 'lavanda', name: 'Lavanda', colors: { coat: '#dccbf3', accent: '#f6a7c7' }, acc: 'flowers', clothes: [['tutu', { c: '#efe2ff' }], ['pearls', {}]], desc: 'tutú lavanda, collar de perlas y corona de flores', req: { mode: 'city', n: 20 } },
+      { id: 'fresita', name: 'Fresita', colors: { coat: '#f9c3d2', accent: '#ffffff' }, acc: 'glasses', clothes: [['hoodie', { c: '#ff6f86', s: '#ffffff' }]], desc: 'sudadera de fresa con capucha y gafitas', req: { mode: 'city', n: 40 } },
+      { id: 'princesa', name: 'Princesa', colors: { coat: '#fff1d6', accent: '#c9a7f0' }, acc: 'crown', clothes: [['cape', { c: '#a77fe6' }], ['pearls', {}]], desc: 'capa de princesa, perlas y corona', req: { mode: 'city', n: 60 } }
     ],
     rocco: [
       { id: 'cachorro', name: 'Cachorro', colors: { coat: '#dcb894', dark: '#c79f78', light: '#fbf7f5', accent: '#9fd3f0' }, acc: null, req: null },
-      { id: 'azulado', name: 'Azulado', colors: { coat: '#8d93a3', dark: '#6f7585', light: '#fbf7f5', accent: '#f6a7bf' }, acc: 'flowers', clothes: [['bandana', { c: '#f6a7bf' }], ['boots', { c: '#9fd3f0' }]], desc: 'pañuelo rosa, botas azules y corona de flores', req: { mode: 'lily', n: 30 } },
-      { id: 'canela', name: 'Canela', colors: { coat: '#b97a4f', dark: '#8e5a37', light: '#fbf1e6', accent: '#f3d36b' }, acc: 'glasses', clothes: [['hoodie', { c: '#4f5f86', s: '#f3d36b' }]], desc: 'sudadera azul marino con capucha y gafitas', req: { mode: 'city', n: 30 } },
-      { id: 'rey', name: 'Rey', colors: { coat: '#efe2cf', dark: '#d6c3a8', light: '#ffffff', accent: '#9fd3f0' }, acc: 'crown', clothes: [['cape', { c: '#2f5fa8' }], ['bowtie', { c: '#c8324b' }]], desc: 'capa azul real, pajarita y corona', req: { mode: 'any', n: 60 } }
+      { id: 'azulado', name: 'Azulado', colors: { coat: '#8d93a3', dark: '#6f7585', light: '#fbf7f5', accent: '#f6a7bf' }, acc: 'flowers', clothes: [['bandana', { c: '#f6a7bf' }], ['boots', { c: '#9fd3f0' }]], desc: 'pañuelo rosa, botas azules y corona de flores', req: { mode: 'city', n: 20 } },
+      { id: 'canela', name: 'Canela', colors: { coat: '#b97a4f', dark: '#8e5a37', light: '#fbf1e6', accent: '#f3d36b' }, acc: 'glasses', clothes: [['hoodie', { c: '#4f5f86', s: '#f3d36b' }]], desc: 'sudadera azul marino con capucha y gafitas', req: { mode: 'city', n: 40 } },
+      { id: 'rey', name: 'Rey', colors: { coat: '#efe2cf', dark: '#d6c3a8', light: '#ffffff', accent: '#9fd3f0' }, acc: 'crown', clothes: [['cape', { c: '#2f5fa8' }], ['bowtie', { c: '#c8324b' }]], desc: 'capa azul real, pajarita y corona', req: { mode: 'city', n: 60 } }
     ],
     monkey: [
       { id: 'travieso', name: 'Travieso', colors: { coat: '#8b5a3c', dark: '#5e3b26', light: '#f0cfa8', accent: '#f3d36b' }, acc: null, req: null },
-      { id: 'platano', name: 'Plátano', colors: { coat: '#f0cf55', dark: '#c9a13a', light: '#fff4cf', accent: '#8ccf7e' }, acc: 'flowers', clothes: [['sweater', { c: '#ffffff', s: '#8ccf7e' }]], desc: 'camiseta de rayas verdes y corona de flores', req: { mode: 'lily', n: 30 } },
-      { id: 'chicle', name: 'Chicle', colors: { coat: '#f6a9c6', dark: '#e07fa6', light: '#fff0f6', accent: '#9fd3f0' }, acc: 'glasses', clothes: [['tutu', { c: '#a8ecf7' }], ['bandana', { c: '#ffffff' }]], desc: 'tutú turquesa, pañuelo y gafitas', req: { mode: 'city', n: 30 } },
-      { id: 'selva', name: 'Rey de la selva', colors: { coat: '#5a4636', dark: '#3a2b20', light: '#e8d2b0', accent: '#f2c94c' }, acc: 'crown', clothes: [['cape', { c: '#3f8a4a' }], ['boots', { c: '#7a4a2e' }]], desc: 'capa de la selva, botas y corona', req: { mode: 'any', n: 60 } }
+      { id: 'platano', name: 'Plátano', colors: { coat: '#f0cf55', dark: '#c9a13a', light: '#fff4cf', accent: '#8ccf7e' }, acc: 'flowers', clothes: [['sweater', { c: '#ffffff', s: '#8ccf7e' }]], desc: 'camiseta de rayas verdes y corona de flores', req: { mode: 'city', n: 20 } },
+      { id: 'chicle', name: 'Chicle', colors: { coat: '#f6a9c6', dark: '#e07fa6', light: '#fff0f6', accent: '#9fd3f0' }, acc: 'glasses', clothes: [['tutu', { c: '#a8ecf7' }], ['bandana', { c: '#ffffff' }]], desc: 'tutú turquesa, pañuelo y gafitas', req: { mode: 'city', n: 40 } },
+      { id: 'selva', name: 'Rey de la selva', colors: { coat: '#5a4636', dark: '#3a2b20', light: '#e8d2b0', accent: '#f2c94c' }, acc: 'crown', clothes: [['cape', { c: '#3f8a4a' }], ['boots', { c: '#7a4a2e' }]], desc: 'capa de la selva, botas y corona', req: { mode: 'city', n: 60 } }
     ]
   };
   const ACC_NAMES = { crown: 'con corona', flowers: 'con corona de flores', glasses: 'con gafitas rosas' };
@@ -2210,7 +2210,7 @@
       box.appendChild(b);
     });
     const n = progress.unlocked[curKey].length - 1;
-    $('skinNote').textContent = note || (n === 0 ? 'Consigue 30 puntos para ganar trajes nuevos. Toca un candado para ver cómo.' : 'Tienes ' + n + ' de 3 trajes. Toca uno para ponérselo.');
+    $('skinNote').textContent = note || (n === 0 ? 'Avanza 20, 40 y 60 pasos para ganar trajes nuevos. Toca un candado para ver cómo.' : 'Tienes ' + n + ' de 3 trajes. Toca uno para ponérselo.');
   }
   Object.keys(SKINS).forEach(applySkin);
   const BEST_KEYS = { lily: 'salchi-lirios-best', city: 'salchi-ciudad-best' };
@@ -2315,6 +2315,25 @@
   renderRecords();
   $('myCode').value = encodeProgress();
   setSaveState(false);
+  // Buscar actualización: compara el número de versión de la web con el de esta copia y recarga si hay una nueva
+  const verMeta = document.querySelector('meta[name="salchi-version"]');
+  if (verMeta) {
+    $('updateBox').hidden = false;
+    $('checkUpdate').addEventListener('click', async () => {
+      const msg = $('updateMsg');
+      msg.textContent = 'Buscando…';
+      try {
+        const res = await fetch('./?v=' + Date.now(), { cache: 'no-store' });
+        const html = await res.text();
+        const m = html.match(/name="salchi-version" content="([^"]+)"/);
+        if (m && m[1] !== verMeta.content) {
+          msg.textContent = 'Hay una versión nueva. Actualizando…';
+          try { const ks = await caches.keys(); await Promise.all(ks.map(k => caches.delete(k))); } catch (e) {}
+          setTimeout(() => location.reload(), 400);
+        } else msg.textContent = 'Ya tienes la última versión.';
+      } catch (e) { msg.textContent = 'No se ha podido comprobar. Revisa tu conexión a internet.'; }
+    });
+  }
   cloudInit();
   $('copyCode').addEventListener('click', () => {
     const code = encodeProgress(), inp = $('myCode'); inp.value = code;
@@ -2331,7 +2350,7 @@
     sfx.unlock && ac && sfx.unlock();
   });
   try { const sc = localStorage.getItem('salchi-lirios-char'); if (sc === 'cat' || sc === 'rocco' || sc === 'monkey') pick(sc); } catch (e) {}
-  try { if (localStorage.getItem('salchi-modo') === 'city') selectGame('city'); } catch (e) {}
+  selectGame('city');   // el juego de los lirios ya no está en el menú
 
   function renderHearts() { [...ui.hearts.children].forEach((h, i) => h.classList.toggle('lost', i >= lives)); }
   function clearItems() { items.forEach(it => scene.remove(it.mesh)); items = []; }

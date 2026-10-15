@@ -1,5 +1,5 @@
 """Convierte el juego publicado en Claude en una web independiente para GitHub Pages."""
-import sys, re, pathlib
+import sys, re, pathlib, time
 src = pathlib.Path(sys.argv[1]).read_text()
 head = '''<!doctype html>
 <html lang="es">
@@ -7,6 +7,7 @@ head = '''<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#fde7ef">
+<meta name="salchi-version" content="VERSION">
 <meta name="description" content="Salchi y los lirios: juegos 3D con Salchi, Miso, Rocco y Samu.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
@@ -30,5 +31,6 @@ if ('serviceWorker' in navigator) window.addEventListener('load', () => navigato
 src, n = re.subn(r'\s*<p class="ribbon">.*?</p>', '', src, flags=re.S)
 assert n == 1, 'no se encontró la dedicatoria'
 out = pathlib.Path(sys.argv[2])
+head = head.replace('VERSION', time.strftime('%Y%m%d%H%M%S'))
 out.write_text(head + src + tail)
-print('ok', out, len(head + src + tail))
+print('ok', out)
