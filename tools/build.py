@@ -6,7 +6,7 @@ head = '''<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#fde7ef">
+<meta name="theme-color" content="#12163a">
 <meta name="salchi-version" content="VERSION">
 <meta name="description" content="Salchi y los lirios: juegos 3D con Salchi, Miso, Rocco y Samu.">
 <link rel="manifest" href="manifest.webmanifest">
