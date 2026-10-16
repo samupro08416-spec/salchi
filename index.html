@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#fde7ef">
-<meta name="salchi-version" content="20261016125117">
+<meta name="salchi-version" content="20261016131049">
 <meta name="description" content="Salchi y los lirios: juegos 3D con Salchi, Miso, Rocco y Samu.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
@@ -16,11 +16,11 @@
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<title>Salchi y los Lirios</title>
+<title>Salchi Cruza la Ciudad</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600;1,800&family=Nunito:wght@600;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik:wght@500;700;800&display=swap">
 <style>
   /* Layout: cámara fija que encuadra todo el jardín; marcador arriba; tarjetas coquette con lazo, arriba para dejar ver al personaje */
   :root {
@@ -307,6 +307,99 @@
   }
   @keyframes pop { from { opacity: 1; margin-top: 0; } to { opacity: 0; margin-top: -50px; } }
   @media (prefers-reduced-motion: reduce) { .pop { animation-duration: .4s; } }
+
+  /* =================== ESTÉTICA ARCADE / RETRO =================== */
+  :root {
+    --sky: #12163a; --ink: #ffffff; --paper: #232a66; --rose: #ffcc00; --blush: #0b0d24; --gold: #ffcc00;
+    --navy: #1d2357; --navy2: #2a3280; --deep: #0b0d24; --yel: #ffcc00; --org: #ff8a00; --red: #ff4b4b; --grn: #38d26b; --cya: #39c6f4;
+    --pix: "Press Start 2P", ui-monospace, monospace;
+    --display: "Press Start 2P", ui-monospace, monospace;
+    --body: "Rubik", system-ui, -apple-system, sans-serif;
+  }
+  body { background: #12163a; color: #fff; }
+  .vignette { background: radial-gradient(ellipse 120% 90% at 50% 45%, transparent 55%, rgba(6,8,24,.38) 100%); }
+  .vignette::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0,0,0,.05) 0 1px, transparent 1px 3px); pointer-events: none; }
+  /* HUD */
+  .pill { background: rgba(13,16,44,.88); border: 3px solid var(--deep); border-radius: 12px; box-shadow: 0 4px 0 var(--deep), inset 0 2px 0 rgba(255,255,255,.12); color: #fff; }
+  .score { padding: 8px 12px 7px; gap: 8px; align-items: center; }
+  .score b { font-family: var(--pix); font-style: normal; font-weight: 400; font-size: 20px; color: #fff; text-shadow: 0 3px 0 #000; }
+  .score span { font-family: var(--pix); font-size: 8px; letter-spacing: 0; opacity: .85; color: var(--yel); }
+  .coinico { width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff6b0 0 18%, #ffd21f 19% 58%, #e09a00 59%); border: 2px solid #8a5a00; box-shadow: 0 2px 0 #000; flex: none; }
+  .mute { color: #fff; font-family: var(--pix); font-size: 16px; }
+  /* Menú */
+  .menu { background: linear-gradient(180deg, rgba(10,14,40,.55) 0%, rgba(10,14,40,0) 26%, rgba(10,14,40,0) 50%, rgba(6,8,24,.35) 100%); }
+  .logo { font-family: var(--pix); font-style: normal; font-weight: 400; font-size: clamp(34px, 11vw, 52px); line-height: 1; color: var(--yel); letter-spacing: 2px;
+    -webkit-text-stroke: 0; text-shadow: 3px 3px 0 #e8431c, 6px 6px 0 #000, 0 0 24px rgba(255,204,0,.35); animation: floaty 3s steps(6) infinite; }
+  .logo em { font-style: normal; font-weight: 400; font-size: clamp(10px, 3.2vw, 14px); margin-top: 12px; color: #fff; -webkit-text-stroke: 0; text-shadow: 2px 2px 0 #000; letter-spacing: 1px; text-transform: uppercase; }
+  @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+  .sheet { background: var(--navy); border-radius: 18px 18px 0 0; border: 4px solid var(--deep); border-bottom: 0;
+    box-shadow: inset 0 3px 0 rgba(255,255,255,.12), 0 -10px 30px rgba(0,0,0,.35); color: #fff; }
+  .grabber { background: rgba(255,255,255,.25); border-radius: 0; height: 4px; }
+  .tabs { background: var(--deep); border-radius: 12px; box-shadow: none; padding: 4px; }
+  .tab { font: 400 10px var(--pix); color: #b9c0ff; border-radius: 8px; padding: 11px 2px; }
+  .tab[aria-selected="true"] { background: var(--yel); color: #1b1300; box-shadow: 0 3px 0 #b08a00; }
+  .gcard { background: var(--navy2); border: 3px solid var(--deep); border-radius: 14px; color: #fff; box-shadow: 0 5px 0 var(--deep), inset 0 2px 0 rgba(255,255,255,.12); }
+  .gcard[aria-pressed="true"] { background: linear-gradient(180deg, #3a46b8, #2a3280); box-shadow: 0 6px 0 var(--deep), inset 0 2px 0 rgba(255,255,255,.18); transform: none; border-color: var(--yel); }
+  .gcard strong { font-family: var(--pix); font-style: normal; font-weight: 400; font-size: 12px; line-height: 1.4; color: var(--yel); text-shadow: 2px 2px 0 #000; }
+  .gcard small { font-size: 12.5px; opacity: .85; font-weight: 500; }
+  .gico .rd { fill: #4a4f5e; } .gico .car { fill: #ff4b4b; stroke: #000; } .gico .win { fill: #bfe8ff; } .gico .wh { fill: #111; } .gico .bw { display: none; }
+  .rec { background: var(--deep); color: var(--yel); box-shadow: none; border-radius: 6px; font-family: var(--pix); font-size: 8px; font-weight: 400; padding: 5px 7px; }
+  .menu .label, .label { font-family: var(--pix); font-size: 8px; letter-spacing: 1px; opacity: 1; color: #9ea8ff; font-weight: 400; }
+  .menu .worlds .world, .world { background: var(--navy2); border: 3px solid var(--deep); border-radius: 12px; box-shadow: 0 4px 0 var(--deep); color: #fff; }
+  .world[aria-pressed="true"] { border-color: var(--yel); background: #3a46b8; box-shadow: 0 4px 0 var(--deep), 0 0 0 2px rgba(255,204,0,.3); }
+  .world .wsw { border-radius: 6px; border: 2px solid var(--deep); }
+  .world .nm { font-weight: 700; }
+  .world svg path { fill: #fff; stroke: #000; }
+  .menu .info p, .menu .skinNote, .card .skinNote { color: #dfe3ff; }
+  .howto, .savebox { background: var(--deep); border-radius: 12px; color: #fff; }
+  .howto summary, .savebox summary { font-family: var(--pix); font-size: 9px; font-weight: 400; color: var(--yel); padding: 4px 0; }
+  .dot { border-radius: 6px; font-family: var(--pix); font-size: 8px; font-weight: 400; color: #000; border: 2px solid #000 !important; }
+  .dot.r { background: #ff4b4b; } .dot.a { background: #39c6f4; } .dot.t { background: #fff; } .dot.sl { background: #5aa9ff; } .dot.w { background: #ffcc00; } .dot.i { background: #bfe8ff; }
+  .menu .chars.three .char, .char { background: var(--navy2); border: 3px solid var(--deep); border-radius: 14px; box-shadow: 0 4px 0 var(--deep); color: #fff; }
+  .menu .chars.three .char[aria-pressed="true"], .char[aria-pressed="true"] { background: #3a46b8; border-color: var(--yel); box-shadow: 0 5px 0 var(--deep); transform: translateY(-2px); }
+  .menu .chars.three .char strong, .char strong { font-family: var(--pix); font-style: normal; font-weight: 400; font-size: 9px; line-height: 1.5; color: var(--yel); }
+  .menu .chars.three .char strong.long { font-size: 7px; }
+  .char small { color: #c9cff8; opacity: 1; }
+  .cpic { border-radius: 10px; border-color: #000; box-shadow: 0 3px 0 #000; }
+  .menu .skins .skin, .skin { background: var(--navy2); border: 3px solid var(--deep); border-radius: 12px; box-shadow: 0 3px 0 var(--deep); color: #fff; }
+  .skin[aria-pressed="true"] { border-color: var(--yel); background: #3a46b8; }
+  .skin .sw { border-radius: 8px; }
+  .skin.locked .sw { background: #3b4170; border-color: #252a55; }
+  .skin svg path { fill: #fff; }
+  .menu .musicline, .musicline { background: var(--navy2); color: #fff; border: 3px solid var(--deep); border-radius: 12px; box-shadow: 0 4px 0 var(--deep); font-family: var(--pix); font-size: 10px; font-weight: 400; }
+  .qseg { background: var(--deep); border-radius: 12px; box-shadow: none; }
+  .qseg button { font: 400 9px var(--pix); color: #b9c0ff; border-radius: 8px; padding: 11px 0; }
+  .qseg button[aria-pressed="true"] { background: var(--yel); color: #1b1300; box-shadow: 0 3px 0 #b08a00; }
+  .qnote, .menu .hint, .hint { color: #c9cff8; opacity: .9; }
+  .saverow input { background: #fff; color: #111; border: 3px solid #000; border-radius: 8px; }
+  .mini { background: var(--yel); color: #1b1300; border: 3px solid #000; border-radius: 8px; box-shadow: 0 3px 0 #000; font-family: var(--pix); font-size: 8px; font-weight: 400; }
+  .mini:active { box-shadow: 0 1px 0 #000; }
+  .card .savebox .saveState { color: var(--yel); }
+  .play3d { font-family: var(--pix); font-style: normal; font-weight: 400; font-size: 20px; letter-spacing: 2px; color: #1b1300; border: 4px solid #000; border-radius: 14px;
+    background: linear-gradient(180deg, #ffe45c 0%, #ffcc00 50%, #ff9f00 100%); text-shadow: 0 2px 0 rgba(255,255,255,.5);
+    box-shadow: inset 0 3px 0 rgba(255,255,255,.6), inset 0 -4px 0 rgba(150,70,0,.35), 0 6px 0 #000; padding: 16px 16px 15px; }
+  .play3d:active { transform: translateY(5px); box-shadow: inset 0 3px 0 rgba(255,255,255,.6), inset 0 -4px 0 rgba(150,70,0,.35), 0 1px 0 #000; }
+  .upd { font-family: var(--pix); font-size: 9px; font-weight: 400; border: 3px solid #000; border-radius: 10px; box-shadow: 0 4px 0 #000; background: linear-gradient(180deg, #8f7bff, #5d47e0); }
+  .upd.new { background: linear-gradient(180deg, #6df0a0, #20b866); box-shadow: 0 4px 0 #000; color: #062b14; text-shadow: none; }
+  .upd.ok { background: #fff; color: #333; box-shadow: 0 4px 0 #000; }
+  /* Fin de partida y ventanas */
+  .card, #over .card { background: var(--navy); border: 4px solid #000; border-radius: 16px; color: #fff; box-shadow: 0 8px 0 #000, 0 20px 40px rgba(0,0,0,.4); }
+  .card::after { border: 2px solid rgba(255,255,255,.08); border-radius: 10px; }
+  .card .bow, #over .bow { display: none; }
+  .card h2, #over h2 { font-family: var(--pix); font-style: normal; font-weight: 400; font-size: 18px; line-height: 1.4; color: var(--yel); text-shadow: 3px 3px 0 #e8431c, 5px 5px 0 #000; }
+  .big { font-family: var(--pix); font-style: normal; font-weight: 400; font-size: 46px; color: #fff; text-shadow: 4px 4px 0 #000; }
+  .card p { color: #dfe3ff; }
+  .card .unlockLine { color: var(--grn); }
+  #over .go, .go { font-family: var(--pix); font-style: normal; font-weight: 400; font-size: 12px; border: 3px solid #000; border-radius: 10px; color: #1b1300;
+    background: linear-gradient(180deg, #ffe45c, #ff9f00); text-shadow: none; box-shadow: 0 5px 0 #000; padding: 14px 10px; }
+  #over .go.alt, .go.alt { background: linear-gradient(180deg, #5e6bff, #3c48d6); color: #fff; box-shadow: 0 5px 0 #000; }
+  .toast { background: var(--navy); color: #fff; border: 3px solid #000; border-radius: 10px; box-shadow: 0 4px 0 #000; font-family: var(--body); }
+  .hyper span { font-family: var(--pix); font-style: normal; font-weight: 400; font-size: 11px; color: #fff; text-shadow: 2px 2px 0 #000; }
+  .hyper i { border: 3px solid #000; border-radius: 4px; height: 14px; background: #111; }
+  .hyper.slow b { background: repeating-linear-gradient(90deg, #39c6f4 0 8px, #1f8fd0 8px 10px); }
+  .slowfx { background: radial-gradient(ellipse at center, rgba(57,198,244,0) 52%, rgba(40,120,220,.35) 100%); }
+  .pop { font-family: var(--pix); font-style: normal; font-weight: 400; font-size: 14px; text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; }
+  button:focus-visible { outline: 3px solid var(--yel); }
 </style>
 
 <canvas id="c" aria-label="Juegos de Salchi y Miso"></canvas>
@@ -316,7 +409,7 @@
   <div class="score pill"><b id="score">0</b><span id="scoreLabel">lirios</span></div>
   <div class="right">
     <div class="hearts pill" id="hearts"></div>
-    <div class="score pill" id="lilyPill" hidden><b id="lilyCount">0</b><span>lirios</span></div>
+    <div class="score pill" id="lilyPill" hidden><i class="coinico" aria-hidden="true"></i><b id="lilyCount">0</b><span>monedas</span></div>
     <button class="pill mute" data-music="short" aria-pressed="true">♪</button>
   </div>
 </div>
@@ -337,7 +430,7 @@
 
 <div class="menu" id="menu">
   <header class="brand" id="brand">
-    <h1 class="logo"><span id="titleName">Salchi</span><em id="titleSub">y los lirios</em></h1>
+    <h1 class="logo"><span id="titleName">Salchi</span><em id="titleSub">cruza la ciudad</em></h1>
     <button class="upd" id="updTop" hidden><span class="ico" aria-hidden="true">↻</span><span class="txt" id="updTxt">Buscar actualización</span></button>
   </header>
   <div class="stage" aria-hidden="true"><span class="pedestal"></span></div>
@@ -1409,7 +1502,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
   }
 
   const burst = [];
-  const burstMats = [M('#f39bbb'), M('#ffffff'), M('#fbd3e0')];
+  const burstMats = [M('#ffcc00'), M('#ffffff'), M('#ff9f00')];
   const burstGold = M('#f5cf6b');
   const rainbowSolid = RAINBOW.map(c => M(c, { emissive: c, emissiveIntensity: 0.35 }));
   let trailIdx = 0;
@@ -1485,20 +1578,20 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
     o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t + dur);
   }
   const sfx = {
-    catch() { tone(1046, 0.1, 'sine', 0.12, 1568); },
-    gold() { [784, 1046, 1318, 1568].forEach((f, i) => setTimeout(() => tone(f, 0.14, 'sine', 0.1), i * 70)); },
-    miss() { tone(392, 0.28, 'sine', 0.1, 220); },
+    catch() { tone(988, 0.07, 'square', 0.06); setTimeout(() => tone(1319, 0.22, 'square', 0.06), 70); },
+    gold() { [784, 1046, 1318, 1568].forEach((f, i) => setTimeout(() => tone(f, 0.12, 'square', 0.05), i * 60)); },
+    miss() { tone(392, 0.28, 'square', 0.05, 196); },
     sting() { tone(200, 0.3, 'sawtooth', 0.06, 100); },
-    over() { tone(659, 0.2, 'sine', 0.1, 523); setTimeout(() => tone(440, 0.45, 'sine', 0.1, 330), 200); },
-    hop() { tone(620, 0.07, 'sine', 0.06, 820); },
-    crash() { tone(170, 0.3, 'square', 0.05, 80); },
-    splash() { tone(500, 0.4, 'sine', 0.09, 90); },
-    slide() { tone(1400, 0.09, 'sine', 0.035, 900); },
-    slowmo() { [988, 784, 659, 523, 392].forEach((f, i) => setTimeout(() => tone(f, 0.22, 'sine', 0.09), i * 80)); },
-    slowEnd() { [523, 659, 784].forEach((f, i) => setTimeout(() => tone(f, 0.1, 'triangle', 0.07), i * 60)); },
-    bump() { tone(220, 0.12, 'triangle', 0.08, 140); },
-    unlock() { [784, 988, 1175, 1568, 1976].forEach((f, i) => setTimeout(() => tone(f, 0.18, 'triangle', 0.09), i * 90)); },
-    rainbow() { [523, 659, 784, 988, 1175, 1319, 1568].forEach((f, i) => setTimeout(() => tone(f, 0.12, 'sine', 0.1), i * 45)); }
+    over() { [523, 392, 330, 262].forEach((f, i) => setTimeout(() => tone(f, i === 3 ? 0.5 : 0.16, 'square', 0.06), i * 150)); },
+    hop() { tone(440, 0.07, 'square', 0.035, 880); },
+    crash() { tone(220, 0.35, 'sawtooth', 0.07, 55); },
+    splash() { tone(700, 0.35, 'triangle', 0.1, 120); },
+    slide() { tone(1200, 0.09, 'triangle', 0.05, 700); },
+    slowmo() { [988, 784, 659, 523, 392].forEach((f, i) => setTimeout(() => tone(f, 0.16, 'square', 0.05), i * 70)); },
+    slowEnd() { [523, 659, 784].forEach((f, i) => setTimeout(() => tone(f, 0.1, 'square', 0.05), i * 60)); },
+    bump() { tone(160, 0.1, 'square', 0.05, 110); },
+    unlock() { [523, 659, 784, 1046, 1319, 1568].forEach((f, i) => setTimeout(() => tone(f, 0.13, 'square', 0.05), i * 80)); },
+    rainbow() { [523, 659, 784, 988, 1175, 1319, 1568].forEach((f, i) => setTimeout(() => tone(f, 0.12, 'square', 0.05), i * 45)); }
   };
 
   // ---------- Música: dos canciones largas, una por juego ----------
@@ -1530,8 +1623,8 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
         C: { chords: ['Dm7', 'Em7', 'Fmaj7', 'G', 'Am', 'F', 'Dm', 'G7'], rh: ['sparse', 'long', 'flow', 'skip', 'long', 'flow', 'run', 'hold'], seed: 47, lead: 'flute', lo: 64, hi: 81, start: 72, bass: 'waltz', pad: 1, arp: true }
       }
     },
-    city: { // «Paseo por la ciudad»: alegre, con batería suave, 40 compases (~83 s)
-      key: 5, bpm: 116, order: ['A', 'B', 'A2', 'C', 'B'],
+    city: { // «Paseo por la ciudad» en versión chiptune (onda cuadrada, bajo triangular y percusión de ruido)
+      key: 5, bpm: 128, chip: true, order: ['A', 'B', 'A2', 'C', 'B'],
       sections: {
         A: { chords: ['C', 'G', 'Am', 'F', 'C', 'G', 'F', 'G'], rh: ['run', 'skip', 'synco', 'skip', 'run', 'flow', 'synco', 'end'], seed: 5, lead: 'pluck', lo: 65, hi: 82, start: 72, bass: 'bounce', perc: 'drums' },
         B: { chords: ['Am', 'F', 'C', 'G', 'Am', 'F', 'G', 'G'], rh: ['synco', 'flow', 'skip', 'run', 'synco', 'skip', 'run', 'end'], seed: 9, lead: 'box', lo: 69, hi: 86, start: 76, bass: 'bounce', perc: 'drums', pad: 0.7 },
@@ -1656,7 +1749,18 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
         o.connect(g); o.start(e.t); o.stop(e.t + 0.3);
       }
     };
-    events.forEach(e => V[e.type](e));
+    const CHIP = { box: 'chip', pluck: 'chip', flute: 'chip', soft: 'chipSoft', bass: 'chipBass', bassPluck: 'chipBass', harp: 'chipArp', pad: 'none', kick: 'nkick', clap: 'nsnare', shaker: 'hat' };
+    Object.assign(V, {
+      none() {},
+      chip(e) { const g = out(), f = midiHz(e.n), d = Math.max(0.12, e.d * 0.95); g.gain.setValueAtTime(0.0001, e.t); g.gain.exponentialRampToValueAtTime(0.12 * e.v, e.t + 0.005); g.gain.setValueAtTime(0.1 * e.v, e.t + d * 0.6); g.gain.exponentialRampToValueAtTime(0.0001, e.t + d);
+        const o = osc('square', f, e.t, e.t + d + 0.05, g); const lfo = off.createOscillator(), lg = off.createGain(); lfo.frequency.value = 6; lg.gain.value = f * 0.004; lfo.connect(lg); lg.connect(o.frequency); lfo.start(e.t + 0.12); lfo.stop(e.t + d + 0.05); },
+      chipSoft(e) { const g = out(), d = Math.max(0.1, e.d * 0.9); env(g, e.t, 0.004, 0.035 * e.v, d); osc('square', midiHz(e.n), e.t, e.t + d + 0.05, g); },
+      chipBass(e) { const g = out(), f = midiHz(e.n); env(g, e.t, 0.004, 0.32 * e.v, 0.2); osc('triangle', f, e.t, e.t + 0.3, g); },
+      chipArp(e) { const g = out(); env(g, e.t, 0.003, 0.03 * e.v, 0.1); osc('square', midiHz(e.n), e.t, e.t + 0.14, g); },
+      nkick(e) { const g = out(); env(g, e.t, 0.002, 0.4 * e.v, 0.12); const o = off.createOscillator(); o.type = 'square'; o.frequency.setValueAtTime(160, e.t); o.frequency.exponentialRampToValueAtTime(40, e.t + 0.1); const lp = off.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 600; o.connect(lp); lp.connect(g); o.start(e.t); o.stop(e.t + 0.15); },
+      nsnare(e) { noise(e, 'highpass', 1800, 0.6, 0.12, 0.14); }
+    });
+    events.forEach(e => V[(T.chip && CHIP[e.type]) || e.type](e));
     const finish = buf => {
       const src = buf.getChannelData(0), n = Math.round(length * SR), data = new Float32Array(n);
       for (let i = 0; i < src.length; i++) data[i % n] += src[i];   // la cola del final pasa al principio: bucle sin cortes
@@ -1746,12 +1850,12 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
   }
   const COLS = 6, LANE_W = 44, CITY_SCALE = 0.47;
   const cm = {
-    grassA: M('#c7e6b8'), grassB: M('#bbdfaa'), road: M('#cdc6d6'), line: M('#ffffff'),
-    water: M('#4aa8e0', { roughness: 0.2, metalness: 0.05 }), ripple: M('#8fd0f5', { roughness: 0.2 }), log: M('#c99a74'), logEnd: M('#ecc9a6'),
+    grassA: M('#7ccb52'), grassB: M('#6dbd45'), road: M('#565b68'), line: M('#f4f4f4'),
+    water: M('#2f9de8', { roughness: 0.2, metalness: 0.05 }), ripple: M('#9bdcff', { roughness: 0.2 }), log: M('#9a6a3f'), logEnd: M('#dcb480'),
     wheel: M('#5b4a55'), glass: M('#eaf6ff', { roughness: 0.2 }), light: M('#fff3b0', { emissive: '#fff3b0', emissiveIntensity: 0.4 }),
-    pot: M('#f3b6c9'), soil: M('#a8806b')
+    pot: M('#c8643c'), soil: M('#6b4a32'), trunk: M('#7a5232', { roughness: 0.9 }), treeA: M('#3fa34d', { roughness: 0.85 }), treeB: M('#5cbf4a', { roughness: 0.85 }), treeC: M('#2f8a3f', { roughness: 0.85 }), apple: M('#e8433a', { roughness: 0.5 })
   };
-  const carMats = ['#f7a8c4', '#bfe6d6', '#d7c6f2', '#fff0a8', '#ffffff', '#f9c9a8', '#a9d8f5'].map(c => M(c, { roughness: 0.45 }));
+  const carMats = ['#e8433a', '#2f7de1', '#f7c331', '#33b56b', '#f2f2f2', '#ff8a2a', '#7b4fd6'].map(c => M(c, { roughness: 0.45 }));
   const boxGeo = new THREE.BoxGeometry(1, 1, 1);
   const wheelGeo = new THREE.CylinderGeometry(0.16, 0.16, 0.12, 10);
   // Troncos con la corteza y los anillos pintados en colores por vértice (así se juntan en una sola pieza)
@@ -1830,7 +1934,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
     try {
       const es = new THREE.Scene();
       const eg = new THREE.SphereGeometry(10, 24, 12); const ec = [];
-      const top = new THREE.Color('#fff6fb'), hor = new THREE.Color('#ffd9e6'), bot = new THREE.Color('#9d8a92'), tmp = new THREE.Color();
+      const top = new THREE.Color('#ffffff'), hor = new THREE.Color('#d2ebff'), bot = new THREE.Color('#7f8a78'), tmp = new THREE.Color();
       for (let i = 0; i < eg.attributes.position.count; i++) { const y = eg.attributes.position.getY(i) / 10; if (y > 0) tmp.copy(hor).lerp(top, Math.pow(y, 0.6)); else tmp.copy(hor).lerp(bot, Math.min(1, -y * 3)); ec.push(tmp.r, tmp.g, tmp.b); }
       eg.setAttribute('color', new THREE.Float32BufferAttribute(ec, 3));
       es.add(new THREE.Mesh(eg, new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.BackSide })));
@@ -1903,7 +2007,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
       if (!all || o.userData.noMerge || !o.geometry.attributes.normal || Array.isArray(o.material)) return false;
       // Los materiales lisos se convierten en colores por vértice de una paleta compartida: casi todo sale en 1-3 llamadas de dibujo
       const mat = o.material; let bm = mat, tint = null;
-      if (mat.isMeshStandardMaterial && !mat.map && !mat.transparent && !mat.wireframe && !mat.isMeshPhysicalMaterial) {
+      if (mat.isMeshStandardMaterial && !mat.map && !mat.transparent && !mat.wireframe && !mat.isMeshPhysicalMaterial && !mat.userData.keepMat) {
         const glow = mat.emissiveIntensity * Math.max(mat.emissive.r, mat.emissive.g, mat.emissive.b) > 0.3;
         bm = palMat(force || (glow ? 'G' : mat.envMap ? 'P' : 'S'), mat.side);
         tint = { c: glow ? mat.color.clone().lerp(mat.emissive, 0.3) : mat.color, own: !!mat.vertexColors && !!o.geometry.attributes.color };
@@ -1971,8 +2075,8 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
     trim: M('#6f6170', { roughness: 0.6 }), tail: M('#ff7b98', { emissive: '#ff4f7a', emissiveIntensity: 0.6 }), hub: M('#f6f2f4', { roughness: 0.3, metalness: 0.4 }),
     curb: M('#f3ecf1', { roughness: 0.8 }), curbSide: M('#d9cbd5', { roughness: 0.8 }), foam: new THREE.MeshStandardMaterial({ color: '#ffffff', transparent: true, opacity: 0.6, roughness: 0.3, depthWrite: false }),
     stripe: M('#ffffff', { roughness: 0.4 }), cone: M('#e9b67a', { roughness: 0.7 }), scoopA: M('#f7a8c4', { roughness: 0.5 }), scoopB: M('#fff3d6', { roughness: 0.5 }),
-    tuft: M('#8fc77e', { roughness: 0.9 }), tuft2: M('#a3d491', { roughness: 0.9 }), clover: M('#ffffff', { roughness: 0.6 }), clover2: M('#ffc2d6', { roughness: 0.6 }), clover3: M('#fff1a6', { roughness: 0.6 }),
-    manhole: M('#a99fae', { roughness: 0.5, metalness: 0.3 }), pole: M('#7d6a86', { roughness: 0.4, metalness: 0.5 }), bulb: M('#fff4c8', { emissive: '#ffe08a', emissiveIntensity: 1.1 }),
+    tuft: M('#8fc77e', { roughness: 0.9 }), tuft2: M('#a3d491', { roughness: 0.9 }), clover: M('#ffffff', { roughness: 0.6 }), clover2: M('#ffd23f', { roughness: 0.6 }), clover3: M('#fff1a6', { roughness: 0.6 }),
+    manhole: M('#a99fae', { roughness: 0.5, metalness: 0.3 }), pole: M('#3c4150', { roughness: 0.4, metalness: 0.5 }), bulb: M('#fff4c8', { emissive: '#ffe08a', emissiveIntensity: 1.1 }),
     stone: M('#cfc6cc', { roughness: 0.9 }), leaf: M('#7fbf73', { roughness: 0.8 }), leaf2: M('#95cc86', { roughness: 0.8 }), moss: M('#9ccf7f', { roughness: 1 })
   });
   shiny(cm.glass, 1.2); cm.glass.roughness = 0.08; cm.glass.metalness = 0.3; cm.glass.color.set('#cfe8fa');
@@ -2004,10 +2108,11 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
       g.add(box(mat, 0.5, 0.05, 0.62, -0.08, 0.74, 0));
       [-1, 1].forEach(sz => g.add(box(mat, 0.05, 0.05, 0.08, 0.16, 0.52, sz * 0.38)));
       g.add(box(cm.trim, 0.03, 0.07, 0.3, 0.465, 0.36, 0, false));
+      g.add(box(cm.trim, 0.015, 0.22, 0.015, -0.28, 0.85, 0.2, false));
       [-1, 1].forEach(s => g.add(box(cm.trim, 0.06, 0.09, 0.72, s * 0.47, 0.25, 0)));
       carLights(g, 0.46, -0.46, 0.4, 0.22);
       addWheels(g, [0.26, -0.26], 0.36);
-      const b = makeBow(0.7, bowMat, true); b.position.set(-0.08, 0.84, 0); g.add(b);
+      
     } else if (len === 1) {                // furgoneta alta
       g.add(box(mat, 0.9, 0.5, 0.72, 0, 0.47, 0));
       g.add(box(cm.trim, 0.92, 0.09, 0.7, 0, 0.22, 0));
@@ -2019,7 +2124,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
       [-1, 1].forEach(s => g.add(box(cm.trim, 0.06, 0.09, 0.72, s * 0.47, 0.25, 0)));
       carLights(g, 0.46, -0.46, 0.38, 0.24);
       addWheels(g, [0.27, -0.27], 0.36);
-      const b = makeBow(0.65, bowMat, true); b.position.set(-0.04, 0.86, 0); g.add(b);
+      
     } else if (style === 0) {              // autobús pastel
       g.add(box(mat, 1.82, 0.62, 0.76, 0, 0.56, 0));
       g.add(box(cm.stripe, 1.84, 0.12, 0.78, 0, 0.34, 0));
@@ -2032,7 +2137,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
       [-1, 1].forEach(s => g.add(box(cm.trim, 0.06, 0.1, 0.76, s * 0.92, 0.26, 0)));
       carLights(g, 0.915, -0.915, 0.4, 0.26);
       addWheels(g, [0.6, -0.6], 0.37, 1.1);
-      const b = makeBow(0.95, bowMat, true); b.position.set(0.3, 0.98, 0); g.add(b);
+      
     } else {                               // camión de helados
       g.add(box(mat, 0.62, 0.42, 0.74, 0.58, 0.42, 0));
       g.add(box(cm.glass, 0.04, 0.2, 0.62, 0.9, 0.56, 0, false));
@@ -2047,7 +2152,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
       g.add(sph(0.06, cm.tail, -0.3, 1.6, 0, 1, 1, 1, 8));
       carLights(g, 0.895, -0.92, 0.4, 0.24);
       addWheels(g, [0.58, -0.6], 0.37);
-      const b = makeBow(0.6, bowMat, true); b.position.set(0.58, 0.72, 0); g.add(b);
+      
     }
     return g;
   }
@@ -2065,12 +2170,12 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
   function makeDecor() {
     const g = new THREE.Group(), r = Math.random();
     if (r < 0.6) {                         // cerezo en flor
-      const tr = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.11, 0.62, 8), trunkMat); tr.position.y = 0.31; tr.castShadow = true; g.add(tr);
-      const pink = Math.random() < 0.5, mA = blossomMats[pink ? 0 : 1], mB = blossomMats[2];
+      const tr = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.11, 0.62, 8), cm.trunk); tr.position.y = 0.31; tr.castShadow = true; g.add(tr);
+      const light = Math.random() < 0.5, mA = light ? cm.treeB : cm.treeA, mB = light ? cm.treeA : cm.treeC;
       [[0, 0.82, 0, 0.36, mA], [0.2, 0.72, 0.1, 0.26, mA], [-0.2, 0.74, -0.06, 0.27, mA], [0.06, 1.05, -0.04, 0.24, mB], [-0.06, 0.7, 0.22, 0.2, mB], [0.12, 0.76, -0.22, 0.2, mA]].forEach(([x, y, z, rr, m]) => {
         const s = new THREE.Mesh(cityTreeGeo, m); s.scale.setScalar(rr / 0.42); s.position.set(x, y, z); s.castShadow = true; g.add(s);
       });
-      for (let i = 0; i < 4; i++) g.add(sph(0.05, blossomMats[i % 2], R(-0.35, 0.35), 0.02, R(-0.35, 0.35), 1, 0.3, 1, 6));
+      if (Math.random() < 0.35) for (let i = 0; i < 3; i++) g.add(sph(0.05, cm.apple, R(-0.28, 0.28), R(0.62, 0.95), R(0.2, 0.32) * (i % 2 ? 1 : -1), 1, 1, 1, 6));
     } else if (r < 0.8) {                  // macetero con tulipanes
       g.add(box(cm.pot, 0.62, 0.42, 0.62, 0, 0.21, 0));
       g.add(box(cm.stripe, 0.66, 0.06, 0.66, 0, 0.43, 0));
@@ -2095,12 +2200,12 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
     g.add(cone(0.13, 0.12, cm.pole, 0.27, 1.5, 0, 10));
     const bulb = sph(0.07, cm.bulb, 0.27, 1.42, 0, 1, 1, 1, 10); bulb.castShadow = false; g.add(bulb);
     const gl = glowSprite('#ffe6a0', 0.7, 0.55); gl.position.set(0.27, 1.4, 0); g.add(gl);
-    const bow = makeBow(0.5, bowMat, true); bow.position.set(0, 1.2, 0.05); g.add(bow);
+    
     return g;
   }
   // Casitas pastel a los lados de la ciudad
-  const houseWalls = ['#fde2ea', '#fff4dc', '#e4f1fb', '#efe6fb', '#e8f6e4'].map(c => M(c, { roughness: 0.85 }));
-  const houseRoofs = ['#e77fa3', '#c8a2e0', '#86b8e0', '#f0a98c'].map(c => M(c, { roughness: 0.6 }));
+  const houseWalls = ['#f3e2c0', '#e9e9e9', '#cfe0f0', '#f2cfa0', '#d9ead3'].map(c => M(c, { roughness: 0.85 }));
+  const houseRoofs = ['#c0392b', '#2c6fb7', '#3d8f4a', '#8e5a2b'].map(c => M(c, { roughness: 0.6 }));
   const roofGeo = new THREE.CylinderGeometry(0.6, 0.6, 1, 3); roofGeo.rotateX(Math.PI / 2); roofGeo.rotateZ(Math.PI / 2);
   function makeHouse() {
     const g = new THREE.Group(), wall = houseWalls[Math.floor(Math.random() * houseWalls.length)], roof = houseRoofs[Math.floor(Math.random() * houseRoofs.length)];
@@ -2133,7 +2238,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
     }
   }
 
-  const shadeMat = new THREE.MeshBasicMaterial({ color: '#6b3a4b', transparent: true, opacity: 0.14, depthWrite: false });
+  const shadeMat = new THREE.MeshBasicMaterial({ color: '#1c2440', transparent: true, opacity: 0.14, depthWrite: false });
   const shades = [-1, 1].map(s => {
     const m = new THREE.Mesh(new THREE.PlaneGeometry(24, 220), shadeMat);
     m.rotation.x = -Math.PI / 2; m.position.set(s * (COLS + 0.5 + 12), 0.04, 0); CS.add(m); return m;
@@ -2149,7 +2254,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
       log: M('#a97c5a'), logEnd: M('#d8b48f'), snow: M('#ffffff', { roughness: 0.9 }),
       pine: M('#4f8a83'), pineDark: M('#3f7570'), trunk: M('#8a6448'), ball: M('#7f97b2', { roughness: 0.75 }), lump: M('#5f7894', { roughness: 0.85 }), snowman: M('#f7fbff', { roughness: 0.85 }),
       rink: M('#a9def6', { roughness: 0.04, metalness: 0.25 }), rinkLine: M('#ffffff', { roughness: 0.1 }), iceBlock: M('#8fd0f0', { roughness: 0.08, metalness: 0.2, transparent: true, opacity: 0.88 }), iceTop: M('#e6f7ff', { roughness: 0.1 }),
-      carrot: M('#f39a4a'), scarf: M('#f39bbb'), coal: M('#2e3440'), sled: M('#f39bbb'), sledTrim: M('#ffffff'), runner: M('#c9d3dd', { metalness: 0.5, roughness: 0.3 }),
+      carrot: M('#f39a4a'), scarf: M('#e8433a'), coal: M('#2e3440'), sled: M('#e8433a'), sledTrim: M('#ffffff'), runner: M('#c9d3dd', { metalness: 0.5, roughness: 0.3 }),
       peng: M('#2e3440'), belly: M('#ffffff'), beak: M('#f7b54a'), crystal: M('#bfe6ff', { emissive: '#7cc7f5', emissiveIntensity: 0.35, roughness: 0.1 })
     },
     desert: {
@@ -2159,7 +2264,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
       cactus: M('#7cab6a'), cactusDark: M('#668f57'), flower: M('#f4a3c4'), rock: M('#d49a78'), rock2: M('#c4876a'),
       palmTrunk: M('#a87a52'), palmLeaf: M('#6fae5e'), coco: M('#7a5434'),
       weed: M('#b58955', { wireframe: true }), weedCore: M('#9c7244'),
-      camel: M('#d9a86a'), camelDark: M('#b98a50'), blanket: M('#f39bbb'), tassel: M('#9fd3f0')
+      camel: M('#d9a86a'), camelDark: M('#b98a50'), blanket: M('#d64545'), tassel: M('#ffcc00')
     },
     hell: {
       gA: M('#2b1414', { roughness: 1 }), gB: M('#231011', { roughness: 1 }), road: M('#120a0c', { roughness: 0.6, metalness: 0.2 }),
@@ -2234,7 +2339,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
       [-1, 1].forEach(sd => g.add(sph(0.025, w.coal, 0.06 * sd, 1.16, 0.15)));
       [0.65, 0.8].forEach(y => g.add(sph(0.03, w.coal, 0, y, 0.24)));
       const sc = new THREE.Mesh(new THREE.TorusGeometry(0.17, 0.05, 8, 18), w.scarf); sc.rotation.x = Math.PI / 2; sc.position.y = 0.96; g.add(sc);
-      const b = makeBow(0.7, bowMat, true); b.position.set(0.05, 1.28, 0); g.add(b);
+      
     } else {                 // cristales de hielo
       [[0, 0.45, 0, 1], [0.2, 0.3, 0.1, 0.7], [-0.18, 0.28, -0.08, 0.6]].forEach(([x, y, z, s0]) => {
         const c = new THREE.Mesh(new THREE.OctahedronGeometry(0.22, 0), w.crystal); c.position.set(x, y * s0 + 0.1, z); c.scale.set(0.6 * s0, 2.2 * s0, 0.6 * s0); c.castShadow = true; g.add(c);
@@ -2411,13 +2516,13 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
   const WORLD_ORDER = ['city', 'ice', 'desert', 'hell'];
   const WORLDS = {
     city: {
-      name: 'Ciudad', label: 'la ciudad', sub: 'cruza la ciudad', need: 0, bg: '#fde7ef', sky: ['#f4b3cb', '#fde7ef', '#fde7ef'], hemi: ['#fff3f8', '#c9a3b4', 0.45], sun: ['#fff0e2', 0.88], rim: 0.22, shade: ['#6b3a4b', 0.14],
-      swatch: 'linear-gradient(180deg,#fde7ef 0 38%,#c7e6b8 38% 62%,#cdc6d6 62%)', particles: { kind: 'petal', color: '#ffc1d5', size: 0.17, opacity: 0.95, count: 90 },
+      name: 'Ciudad', label: 'la ciudad', sub: 'cruza la ciudad', need: 0, bg: '#cdeaff', sky: ['#3d9cf0', '#cdeaff', '#cdeaff'], hemi: ['#f4f9ff', '#7d8f6c', 0.5], sun: ['#fff4e2', 0.9], rim: 0.2, shade: ['#1c2440', 0.16],
+      swatch: 'linear-gradient(180deg,#5fb2f5 0 38%,#6dbd45 38% 62%,#565b68 62%)', particles: null,
       lane: { gA: cm.grassA, gB: cm.grassB, road: cm.road, water: cm.water, ripple: cm.ripple },
       vehicle: makeCar, float: len => makeLog(len), decor: makeDecor, sinkGlow: [0, 0.1, 0.25],
       variants: 14, side: makeHouse, lamp: makeLamp, curb: [cm.curb, cm.curbSide], foam: cm.foam, pebble: cm.stone,
       deaths: { car: '¡Cuidado con los coches!', water: '¡Al agua!', drift: 'El tronco se te llevó' },
-      rules: [['r', '!', 'Coches: espera tu momento y cruza.'], ['a', '~', 'Río: salta sobre los troncos, nunca al agua.'], ['t', '»', 'Date prisa: la ciudad avanza y no te espera.'], ['sl', '≋', 'Lirio azul: todo va a cámara lenta durante 10 segundos.'], ['w', '+1', 'Lirios en la hierba: recógelos de paso.']]
+      rules: [['r', '!', 'Coches: espera tu momento y cruza.'], ['a', '~', 'Río: salta sobre los troncos, nunca al agua.'], ['t', '»', 'Date prisa: la ciudad avanza y no te espera.'], ['sl', '◷', 'Reloj azul: todo va a cámara lenta durante 10 segundos.'], ['w', '+1', 'Monedas: recógelas de paso para sumar.']]
     },
     ice: {
       name: 'Hielo', label: 'el mundo de hielo', sub: 'cruza el hielo', need: 50, bg: '#e2f1fb', sky: ['#8fc4ec', '#e2f1fb', '#e2f1fb'], hemi: ['#eef7ff', '#9fbad3', 0.48], sun: ['#ffffff', 0.8], rim: 0.25, shade: ['#2c4a66', 0.14],
@@ -2425,7 +2530,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
       lane: { gA: WM.ice.gA, gB: WM.ice.gB, road: WM.ice.road, water: WM.ice.water, ripple: WM.ice.ripple },
       vehicle: iceVehicle, float: iceFloat, decor: iceDecor, side: makeIgloo, lamp: makeIceLantern, foam: cm.foam, pebble: WM.ice.iceTop, sinkGlow: [0, 0.15, 0.35], gap: [7, 7], speedMul: 0.8, maxRoads: 2,
       deaths: { car: '¡Te arrolló la nieve!', water: '¡Al agua helada!', drift: 'El tronco helado se te llevó' },
-      rules: [['r', '!', 'Bolas de nieve y trineos: esquívalos.'], ['i', '≈', 'Pistas de hielo: resbalas una casilla más hacia donde vas, sin salirte del hielo.'], ['a', '~', 'Río helado: salta sobre los troncos nevados.'], ['t', '»', 'Date prisa: la tormenta avanza y no te espera.'], ['sl', '≋', 'Lirio azul: todo va a cámara lenta durante 10 segundos.'], ['w', '+1', 'Lirios en la nieve: recógelos de paso.']]
+      rules: [['r', '!', 'Bolas de nieve y trineos: esquívalos.'], ['i', '≈', 'Pistas de hielo: resbalas una casilla más hacia donde vas, sin salirte del hielo.'], ['a', '~', 'Río helado: salta sobre los troncos nevados.'], ['t', '»', 'Date prisa: la tormenta avanza y no te espera.'], ['sl', '◷', 'Reloj azul: todo va a cámara lenta durante 10 segundos.'], ['w', '+1', 'Monedas: recógelas de paso para sumar.']]
     },
     desert: {
       name: 'Desierto', label: 'el desierto', sub: 'cruza el desierto', need: 100, bg: '#fbe2c0', sky: ['#f2a46f', '#fbe2c0', '#fbe2c0'], hemi: ['#fff1dc', '#c99a6a', 0.45], sun: ['#ffe6bd', 0.95], rim: 0.2, shade: ['#6b4423', 0.13],
@@ -2433,7 +2538,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
       lane: { gA: WM.desert.gA, gB: WM.desert.gB, road: WM.desert.road, water: WM.desert.water, ripple: WM.desert.ripple },
       vehicle: desertVehicle, float: desertFloat, decor: desertDecor, side: makeAdobe, lamp: makeTorch, pebble: WM.desert.rock2, sinkGlow: [0.2, 0.12, 0],
       deaths: { car: '¡Cuidado con los rodadores!', water: 'Te tragó la arena', drift: 'La balsa se te llevó' },
-      rules: [['r', '!', 'Plantas rodadoras y camellos: no frenan.'], ['a', '~', 'Arenas movedizas: salta a las balsas de madera.'], ['t', '»', 'Date prisa: el sol aprieta y no te espera.'], ['sl', '≋', 'Lirio azul: todo va a cámara lenta durante 10 segundos.'], ['w', '+1', 'Lirios en la arena: recógelos de paso.']]
+      rules: [['r', '!', 'Plantas rodadoras y camellos: no frenan.'], ['a', '~', 'Arenas movedizas: salta a las balsas de madera.'], ['t', '»', 'Date prisa: el sol aprieta y no te espera.'], ['sl', '◷', 'Reloj azul: todo va a cámara lenta durante 10 segundos.'], ['w', '+1', 'Monedas: recógelas de paso para sumar.']]
     },
     hell: {
       name: 'Infierno', label: 'el infierno', sub: 'cruza el infierno', need: 150, bg: '#16050a', sky: ['#030001', '#2a070c', '#16050a'], hemi: ['#ff7a4a', '#1a0306', 0.42], sun: ['#ff9a60', 0.75], rim: 0.25, shade: ['#000000', 0.35],
@@ -2441,7 +2546,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
       lane: { gA: WM.hell.gA, gB: WM.hell.gB, road: WM.hell.road, water: WM.hell.water, ripple: WM.hell.ripple },
       vehicle: hellVehicle, float: hellFloat, decor: hellDecor, side: makeSpire, lamp: makeBrazier, foam: WM.hell.crack, pebble: WM.hell.obsidian, sinkGlow: [0.6, 0.18, 0],
       deaths: { car: '¡Te quemaste!', water: '¡Caíste en la lava!', drift: 'La piedra se te llevó a la lava' },
-      rules: [['r', '!', 'Bolas de fuego y vagonetas de lava: no te quemes.'], ['a', '~', 'Ríos de lava: salta sobre las piedras flotantes.'], ['t', '»', 'Date prisa: el fuego avanza y no te espera.'], ['sl', '≋', 'Lirio azul: todo va a cámara lenta durante 10 segundos.'], ['w', '+1', 'Lirios entre las rocas: recógelos de paso.']]
+      rules: [['r', '!', 'Bolas de fuego y vagonetas de lava: no te quemes.'], ['a', '~', 'Ríos de lava: salta sobre las piedras flotantes.'], ['t', '»', 'Date prisa: el fuego avanza y no te espera.'], ['sl', '◷', 'Reloj azul: todo va a cámara lenta durante 10 segundos.'], ['w', '+1', 'Monedas: recógelas de paso para sumar.']]
     }
   };
   // Detalles del suelo de cada mundo
@@ -2508,8 +2613,35 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
     return city.genType;
   }
   const pebbleGeo = new THREE.DodecahedronGeometry(0.06, 0);
+  // Monedas de oro (y el reloj azul de la cámara lenta)
+  const coinGold = shiny(M('#ffc81f', { metalness: 0.85, roughness: 0.26, emissive: '#6a4300', emissiveIntensity: 0.45 }), 1.2); coinGold.userData.keepMat = true;
+  const coinDeep = shiny(M('#d98a00', { metalness: 0.85, roughness: 0.3, emissive: '#4a2c00', emissiveIntensity: 0.4 }), 1.0); coinDeep.userData.keepMat = true;
+  const starGeo = (() => { const sh = new THREE.Shape(); for (let i = 0; i < 10; i++) { const a = Math.PI / 2 + i * Math.PI / 5, r = i % 2 ? 0.11 : 0.25; i ? sh.lineTo(Math.cos(a) * r, Math.sin(a) * r) : sh.moveTo(Math.cos(a) * r, Math.sin(a) * r); } return new THREE.ExtrudeGeometry(sh, { depth: 0.03, bevelEnabled: false }); })();
+  function makeCoin() {
+    const g = new THREE.Group();
+    const body = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.12, 36), coinDeep); body.rotation.x = Math.PI / 2; body.castShadow = true; g.add(body);
+    const face = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 0.13, 36), coinGold); face.rotation.x = Math.PI / 2; g.add(face);
+    [-1, 1].forEach(sd => {
+      const rim = new THREE.Mesh(new THREE.TorusGeometry(0.44, 0.045, 8, 40), coinGold); rim.position.z = 0.062 * sd; g.add(rim);
+      const st = new THREE.Mesh(starGeo, coinDeep); st.position.z = 0.062 * sd; if (sd < 0) st.rotation.y = Math.PI; g.add(st);
+    });
+    const gl = glowSprite('#ffd84a', 2.4, 0.4); g.add(gl);
+    return g;
+  }
+  function makeClock() {
+    const g = new THREE.Group(), blue = shiny(M('#2f8cff', { roughness: 0.25, metalness: 0.3, emissive: '#0b3a80', emissiveIntensity: 0.5 }), 1.0), wht = M('#ffffff', { roughness: 0.3 }), dk = M('#16204a');
+    const body = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.18, 32), blue); body.rotation.x = Math.PI / 2; body.castShadow = true; g.add(body);
+    [-1, 1].forEach(sd => {
+      const face = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 0.02, 32), wht); face.rotation.x = Math.PI / 2; face.position.z = 0.09 * sd; g.add(face);
+      const h1 = box(dk, 0.04, 0.26, 0.02, 0, 0.11, 0.1 * sd, false), h2 = box(dk, 0.2, 0.04, 0.02, 0.08, 0, 0.1 * sd, false); g.add(h1); g.add(h2);
+      for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2; g.add(box(dk, 0.03, 0.06, 0.02, Math.cos(a) * 0.32, Math.sin(a) * 0.32, 0.1 * sd, false)); }
+    });
+    g.add(cyl(0.07, 0.07, 0.12, blue, 0, 0.56, 0, 12)); g.add(cyl(0.11, 0.11, 0.06, blue, 0, 0.64, 0, 12));
+    const gl = glowSprite('#5ab0ff', 3.0, 0.55); g.add(gl);
+    return g;
+  }
   function pickupLily(blue) {
-    return fromTemplate(blue ? 'lily:blue' : 'lily:pink', () => { const l = makeLily(false, false, !!blue, true); const gl = glowSprite(blue ? '#7cc7f5' : '#ff9cc0', blue ? 4.6 : 3.6, blue ? 0.6 : 0.45); gl.position.set(0, 0.1, -0.3); l.add(gl); return l; });
+    return fromTemplate(blue ? 'pick:clock' : 'pick:coin', () => { const c = blue ? makeClock() : makeCoin(); c.scale.setScalar(0.62); return c; });
   }
   function spawnMover(W, kind, len) {
     if (kind === 'v') { const v = Math.floor(Math.random() * (W.variants || 3)); return fromTemplate(city.world + ':v' + len + ':' + v, () => W.vehicle(len, v)); }
@@ -2551,7 +2683,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
       row.blocked.forEach(x => { const b = new THREE.Group(); b.add(box(WM.ice.iceBlock, 0.8, 0.7, 0.8, 0, 0.35, 0)); b.add(box(WM.ice.iceTop, 0.82, 0.06, 0.82, 0, 0.72, 0, false)); b.add(box(WM.ice.iceTop, 0.06, 0.5, 0.06, 0.25, 0.4, 0.41, false)); b.position.x = x; g.add(b); });
       sideDecor();
       for (let x = -COLS; x <= COLS; x++) if (!row.blocked.has(x) && Math.random() < 0.05) {
-        const l = pickupLily(); l.scale.setScalar(0.3); l.position.set(x, 0.6, 0); g.add(l); row.pickups.set(x, l);
+        const l = pickupLily(); l.scale.setScalar(0.42); l.position.set(x, 0.5, 0); g.add(l); row.pickups.set(x, l);
       }
       placeSlowLily(row, g, r);
     } else if (type === 'grass' || type === 'wall') {
@@ -2565,7 +2697,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
       sideDecor();
       if (type === 'grass' && r >= 3) for (let x = -COLS; x <= COLS; x++) {
         if (!row.blocked.has(x) && Math.random() < 0.06) {
-          const l = pickupLily(); l.scale.setScalar(0.3); l.position.set(x, 0.6, 0); g.add(l); row.pickups.set(x, l);
+          const l = pickupLily(); l.scale.setScalar(0.42); l.position.set(x, 0.5, 0); g.add(l); row.pickups.set(x, l);
         }
       }
       if (type === 'grass') placeSlowLily(row, g, r);
@@ -2629,7 +2761,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
     for (let x = -COLS + 1; x <= COLS - 1; x++) if (!row.blocked.has(x) && !row.pickups.has(x)) free.push(x);
     if (!free.length) return;
     const x = free[Math.floor(Math.random() * free.length)];
-    const l = pickupLily(true); l.scale.setScalar(0.42); l.position.set(x, 0.75, 0); l.userData.slow = true;
+    const l = pickupLily(true); l.scale.setScalar(0.5); l.position.set(x, 0.62, 0); l.userData.slow = true;
     const halo = new THREE.Mesh(new THREE.RingGeometry(0.35, 0.48, 28), new THREE.MeshBasicMaterial({ color: '#7cc7f5', transparent: true, opacity: 0.55, side: THREE.DoubleSide, depthWrite: false }));
     halo.rotation.x = -Math.PI / 2; halo.position.set(x, 0.03, 0); g.add(halo); l.userData.halo = halo;
     g.add(l); row.pickups.set(x, l); city.lastSlow = r;
@@ -2685,9 +2817,9 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
         spawnBurstIn(CS, p.x, 0.8, -p.r);
         popText('¡Cámara lenta!', p.x, 1.4, '#3b8fd0', -p.r);
       } else {
-        city.lilies++; ui.lilyCount.textContent = city.lilies; bumpEl(ui.lilyCount); sfx.catch(); city.happyT = 0.6; fxSparkle(p.x, 0.7, -p.r, '#ffd1e3');
+        city.lilies++; ui.lilyCount.textContent = city.lilies; bumpEl(ui.lilyCount); sfx.catch(); city.happyT = 0.6; fxSparkle(p.x, 0.7, -p.r, '#ffe066');
         spawnBurstIn(CS, p.x, 0.8, -p.r);
-        popText('+1 ♡', p.x, 1.2, '#e0668f', -p.r);
+        popText('+1', p.x, 1.2, '#ffcc00', -p.r);
       }
     }
     if (p.r > p.maxR) { p.maxR = p.r; city.score = p.maxR; ui.score.textContent = city.score; bumpEl(ui.score); checkUnlocks(city.score); checkWorlds(city.score); }
@@ -2725,15 +2857,15 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
   // ---- Efectos: polvo al aterrizar, salpicaduras, chispitas y estrellas de mareo ----
   const blink = { next: 2, t: -1 };
   const blobTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 64; const x = c.getContext('2d'); if (!x) return null; const gr = x.createRadialGradient(32, 32, 0, 32, 32, 32); gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.55, 'rgba(255,255,255,.55)'); gr.addColorStop(1, 'rgba(255,255,255,0)'); x.fillStyle = gr; x.fillRect(0, 0, 64, 64); return new THREE.CanvasTexture(c); })();
-  const blob = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: blobTex, color: '#2c1520', transparent: true, opacity: 0.42, depthWrite: false }));
+  const blob = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: blobTex, color: '#10131f', transparent: true, opacity: 0.42, depthWrite: false }));
   blob.geometry.rotateX(-Math.PI / 2); blob.renderOrder = 2; CS.add(blob);
   pMat.map = blobTex; pMat.needsUpdate = true;
   // Pedestal del menú: el personaje posa sobre una peana con brillitos
   const pedestal = new THREE.Group();
   {
-    const top = new THREE.Mesh(new THREE.CylinderGeometry(0.8, 0.86, 0.1, 48), shiny(M('#ffeef4', { roughness: 0.35 }), 0.5)); top.position.y = 0.0; top.receiveShadow = true; pedestal.add(top);
-    const rim = new THREE.Mesh(new THREE.TorusGeometry(0.83, 0.035, 10, 64), shiny(M('#f39bbb', { roughness: 0.3 }), 0.8)); rim.rotation.x = Math.PI / 2; rim.position.y = 0.04; pedestal.add(rim);
-    const halo = glowSprite('#ffb3cf', 2.6, 0.35); halo.position.y = 0.1; halo.scale.y = 0.9; pedestal.add(halo);
+    const top = new THREE.Mesh(new THREE.CylinderGeometry(0.8, 0.86, 0.1, 48), shiny(M('#2a3280', { roughness: 0.35 }), 0.5)); top.position.y = 0.0; top.receiveShadow = true; pedestal.add(top);
+    const rim = new THREE.Mesh(new THREE.TorusGeometry(0.83, 0.035, 10, 64), shiny(M('#ffcc00', { roughness: 0.25, metalness: 0.6 }), 0.9)); rim.rotation.x = Math.PI / 2; rim.position.y = 0.04; pedestal.add(rim);
+    const halo = glowSprite('#ffd84a', 2.6, 0.3); halo.position.y = 0.1; halo.scale.y = 0.9; pedestal.add(halo);
     const spk = new THREE.Group(); pedestal.add(spk); pedestal.userData.spk = spk;
     for (let i = 0; i < 7; i++) { const a = i / 7 * Math.PI * 2, sp = new THREE.Mesh(sparkleGeo, sparkleMat); sp.position.set(Math.cos(a) * 0.95, 0.3 + (i % 3) * 0.25, Math.sin(a) * 0.95); sp.scale.setScalar(0.32 + (i % 2) * 0.2); spk.add(sp); }
   }
@@ -2796,7 +2928,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
     x.clearRect(0, 0, w, h);
     for (let i = 0; i < 7; i++) { const px = R(0, w), py = R(0, h), r = R(40, 80); wrap(() => { const gr = x.createRadialGradient(px, py, 0, px, py, r); gr.addColorStop(0, 'rgba(255,255,255,.9)'); gr.addColorStop(0.6, 'rgba(255,255,255,.45)'); gr.addColorStop(1, 'rgba(255,255,255,0)'); x.fillStyle = gr; x.beginPath(); x.ellipse(px, py, r * 1.4, r, 0, 0, 7); x.fill(); }); }
   }, 1, 1);
-  const cloudShade = new THREE.Mesh(new THREE.PlaneGeometry(70, 70), new THREE.MeshBasicMaterial({ map: cloudTex, color: '#3a2236', transparent: true, opacity: 0.13, depthWrite: false }));
+  const cloudShade = new THREE.Mesh(new THREE.PlaneGeometry(70, 70), new THREE.MeshBasicMaterial({ map: cloudTex, color: '#1d2333', transparent: true, opacity: 0.13, depthWrite: false }));
   cloudShade.geometry.rotateX(-Math.PI / 2); cloudShade.position.y = 0.03; cloudShade.renderOrder = 1; CS.add(cloudShade);
   function updateCity(dt) {
     const p = city.p, C = current, g = C.group;
@@ -3030,13 +3162,13 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
   // ---------- Trajes desbloqueables (recompensas a partir de 30 puntos) ----------
   const SKINS = {
     dog: [
-      { id: 'clasico', name: 'Clásico', colors: { coat: '#b9784a', dark: '#7a4a2e', light: '#e3b48d', accent: '#f39bbb' }, acc: null, req: null },
+      { id: 'clasico', name: 'Clásico', colors: { coat: '#b9784a', dark: '#7a4a2e', light: '#e3b48d', accent: '#e8433a' }, acc: null, req: null },
       { id: 'choco', name: 'Chocolate', colors: { coat: '#6e4630', dark: '#4a2c1d', light: '#d9b08c', accent: '#c9a7f0' }, acc: 'flowers', clothes: [['sweater', { c: '#c9a7f0', s: '#ffffff' }]], desc: 'jersey de lana lila y corona de flores', req: { mode: 'city', n: 20 } },
       { id: 'algodon', name: 'Algodón de azúcar', colors: { coat: '#f6bfd3', dark: '#e893b3', light: '#fff4f8', accent: '#9fd8c9' }, acc: 'glasses', clothes: [['tutu', { c: '#ffb3cf' }], ['boots', { c: '#ffffff' }]], desc: 'tutú rosa, botitas blancas y gafitas', req: { mode: 'city', n: 40 } },
       { id: 'real', name: 'Real', colors: { coat: '#f1d7a8', dark: '#d9b27a', light: '#fff6e6', accent: '#f39bbb' }, acc: 'crown', clothes: [['cape', { c: '#c8324b' }], ['bowtie', { c: '#2b2b4a' }]], desc: 'capa real, pajarita y corona', req: { mode: 'city', n: 60 } }
     ],
     cat: [
-      { id: 'nieve', name: 'Nieve', colors: { coat: '#fffaf7', accent: '#f39bbb' }, acc: null, req: null },
+      { id: 'nieve', name: 'Nieve', colors: { coat: '#fffaf7', accent: '#e8433a' }, acc: null, req: null },
       { id: 'lavanda', name: 'Lavanda', colors: { coat: '#dccbf3', accent: '#f6a7c7' }, acc: 'flowers', clothes: [['tutu', { c: '#efe2ff' }], ['pearls', {}]], desc: 'tutú lavanda, collar de perlas y corona de flores', req: { mode: 'city', n: 20 } },
       { id: 'fresita', name: 'Fresita', colors: { coat: '#f9c3d2', accent: '#ffffff' }, acc: 'glasses', clothes: [['hoodie', { c: '#ff6f86', s: '#ffffff' }]], desc: 'sudadera de fresa con capucha y gafitas', req: { mode: 'city', n: 40 } },
       { id: 'princesa', name: 'Princesa', colors: { coat: '#fff1d6', accent: '#c9a7f0' }, acc: 'crown', clothes: [['cape', { c: '#a77fe6' }], ['pearls', {}]], desc: 'capa de princesa, perlas y corona', req: { mode: 'city', n: 60 } }
@@ -3543,7 +3675,7 @@ diffuseColor.rgb *= base * tone * ao * vAo;`)
     ui.bestLine.textContent = 'Récord: ' + bests[mode] + (isCity ? ' pasos' : ' lirios');
     ui.extraLine.hidden = !isCity;
     renderRecords();
-    ui.extraLine.textContent = 'Lirios recogidos por el camino: ' + city.lilies;
+    ui.extraLine.textContent = 'Monedas recogidas: ' + city.lilies;
     hyperT = 0; ui.hyper.hidden = true; ui.slowfx.hidden = true; city.slowT = 0;
     saveProgress();
     ui.unlockLine.hidden = !runUnlocks.length;
