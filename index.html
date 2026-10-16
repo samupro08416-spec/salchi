@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#fde7ef">
-<meta name="salchi-version" content="20261016015842">
+<meta name="salchi-version" content="20261016020323">
 <meta name="description" content="Salchi y los lirios: juegos 3D con Salchi, Miso, Rocco y Samu.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
@@ -160,7 +160,8 @@
   .dot.sl { background: #dff1fd; border: 2px solid #3b8fd0; }
   .dot.rb { background: conic-gradient(#ff8fa3, #ffb86b, #ffe066, #8ee39a, #7cc7f5, #b892f0, #ff8fa3); border: 2px solid var(--ink); }
   .card .unlockLine { color: #d9577f; font-weight: 800; }
-  .chars.three { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .chars.three { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .menu .chars.three .char strong.long { font-size: 14px; line-height: 1.2; word-break: break-all; }
   .menu .chars.three .char strong { font-size: 19px; }
   .menu .chars.three .cpic { width: 42px; height: 42px; }
   .chars.three .char { padding: 9px 4px 7px; }
@@ -364,6 +365,7 @@
         <button class="char" id="pick-cat" aria-pressed="false"><span class="cpic" id="cpic-cat"></span><strong>Miso</strong><small>Gatita blanca</small></button>
         <button class="char" id="pick-rocco" aria-pressed="false"><span class="cpic" id="cpic-rocco"></span><strong>Rocco</strong><small>Amstaff cachorro</small></button>
         <button class="char" id="pick-monkey" aria-pressed="false"><span class="cpic" id="cpic-monkey"></span><strong>Samu</strong><small>Monito</small></button>
+        <button class="char" id="pick-turtle" aria-pressed="false"><span class="cpic" id="cpic-turtle"></span><strong class="long">DylonBaby30</strong><small>Tortuga ninja</small></button>
       </div>
       <div class="label" id="wardLabel">Armario de Salchi</div>
       <div class="skins" id="skins"></div>
@@ -798,9 +800,69 @@
     return { size: 0.9, name: 'Samu', group, body, head, legs, ears, tailWag, tongue, hurtMat: coat, reach: 0.95, speed: 9.5, mats: { coat, dark, light, accent }, acc, headBow: null };
   }
 
-  const chars = { dog: buildDog(), cat: buildCat(), rocco: buildRocco(), monkey: buildMonkey() };
+  // Dibujo de las placas del caparazón
+  const shellTex = (() => {
+    const c = document.createElement('canvas'); c.width = c.height = 128;
+    const x = c.getContext('2d'); if (!x) return null;
+    x.fillStyle = '#f2f2f2'; x.fillRect(0, 0, 128, 128);
+    const hex = (cx, cy, r) => { x.beginPath(); for (let i = 0; i < 6; i++) { const a = Math.PI / 3 * i + Math.PI / 6; x.lineTo(cx + Math.cos(a) * r, cy + Math.sin(a) * r); } x.closePath(); };
+    for (let row = -1; row < 5; row++) for (let col = -1; col < 5; col++) {
+      const cx = col * 32 + (row % 2 ? 16 : 0), cy = row * 28;
+      hex(cx, cy, 15); x.fillStyle = 'rgba(255,255,255,.55)'; x.fill(); x.lineWidth = 3; x.strokeStyle = '#8f8f8f'; x.stroke();
+      hex(cx, cy, 9); x.lineWidth = 1; x.strokeStyle = 'rgba(0,0,0,.18)'; x.stroke();
+    }
+    const t3 = new THREE.CanvasTexture(c); t3.wrapS = t3.wrapT = THREE.RepeatWrapping; t3.repeat.set(2, 2); return t3;
+  })();
+  function buildTurtle() {
+    const skin = M('#7cc576', { roughness: 0.6 }), shell = M('#5f7f3e', { roughness: 0.55 }), belly = M('#e6d79a', { roughness: 0.7 }), accent = M('#2b2b33', { roughness: 0.85 });
+    if (shellTex) shell.map = shellTex;
+    const silver = M('#d9dde3', { metalness: 0.7, roughness: 0.25 }), eyeW = M('#ffffff', { roughness: 0.3 });
+    const group = new THREE.Group(), body = new THREE.Group(); group.add(body);
+    // Caparazón, borde y peto
+    const dome = new THREE.Mesh(new THREE.SphereGeometry(0.6, 28, 16, 0, Math.PI * 2, 0, Math.PI * 0.55), shell);
+    dome.scale.set(1.05, 0.72, 0.9); dome.position.y = 0.5; body.add(dome);
+    const rim = new THREE.Mesh(new THREE.TorusGeometry(0.6, 0.065, 10, 36), shell); rim.rotation.x = Math.PI / 2; rim.scale.set(1.05, 0.9, 1); rim.position.y = 0.45; body.add(rim);
+    const plastron = new THREE.Mesh(new THREE.SphereGeometry(0.55, 20, 12), belly); plastron.scale.set(1.0, 0.28, 0.82); plastron.position.y = 0.42; body.add(plastron);
+    // Fajín ninja con estrella plateada
+    const sash = new THREE.Mesh(new THREE.TorusGeometry(0.59, 0.045, 8, 36), accent); sash.rotation.x = Math.PI / 2; sash.scale.set(1.05, 0.9, 1); sash.position.y = 0.58; body.add(sash);
+    [-1, 1].forEach(sd => {
+      const star = new THREE.Group();
+      for (let i = 0; i < 4; i++) { const blade = new THREE.Mesh(new THREE.ConeGeometry(0.04, 0.16, 4), silver); blade.rotation.z = i * Math.PI / 2; blade.position.set(Math.sin(i * Math.PI / 2) * -0.07, Math.cos(i * Math.PI / 2) * 0.07, 0); star.add(blade); }
+      const hub = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.02, 10), accent); hub.rotation.x = Math.PI / 2; star.add(hub);
+      star.position.set(-0.05, 0.6, 0.55 * sd); star.rotation.y = sd > 0 ? 0 : Math.PI; body.add(star);
+    });
+    // Cuello y cabeza con capucha ninja (deja ver los ojos)
+    const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.14, 0.34, 12), skin); neck.position.set(0.6, 0.62, 0); neck.rotation.z = -0.95; body.add(neck);
+    const head = new THREE.Group(); head.position.set(0.82, 0.78, 0); body.add(head);
+    const skull = new THREE.Mesh(new THREE.SphereGeometry(0.27, 22, 16), skin); skull.scale.set(1.15, 1, 1); head.add(skull);
+    const hood = new THREE.Mesh(new THREE.SphereGeometry(0.295, 22, 16, Math.PI + 0.8, Math.PI * 2 - 1.6), accent); hood.scale.set(1.15, 1.02, 1.02); head.add(hood);
+    const mask = new THREE.Mesh(new THREE.SphereGeometry(0.3, 22, 10, Math.PI - 0.85, 1.7, Math.PI * 0.55, Math.PI * 0.45), accent); mask.scale.set(1.15, 1, 1.02); head.add(mask);
+    const browBand = new THREE.Mesh(new THREE.SphereGeometry(0.3, 22, 8, Math.PI - 0.85, 1.7, Math.PI * 0.08, Math.PI * 0.3), accent); browBand.scale.set(1.15, 1, 1.02); head.add(browBand);
+    const knot = new THREE.Mesh(new THREE.SphereGeometry(0.07, 10, 8), accent); knot.position.set(-0.32, 0.06, 0); head.add(knot);
+    [-1, 1].forEach(sd => {
+      const w = new THREE.Mesh(new THREE.SphereGeometry(0.075, 12, 10), eyeW); w.scale.set(0.6, 0.85, 1); w.position.set(0.27, 0.04, 0.11 * sd); head.add(w);
+      const pu = new THREE.Mesh(new THREE.SphereGeometry(0.042, 10, 8), black); pu.position.set(0.31, 0.04, 0.11 * sd); head.add(pu);
+      const gl = new THREE.Mesh(new THREE.SphereGeometry(0.014, 6, 5), white); gl.position.set(0.335, 0.065, 0.12 * sd); head.add(gl);
+    });
+    const tongue = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 6), tongueMat); tongue.visible = false; tongue.position.set(0.33, -0.12, 0); head.add(tongue);
+    const acc = addAccessories(head, { top: 0.28, eyeX: 0.28, eyeY: 0.04, eyeZ: 0.12, r: 0.27 });
+    // Patitas cortas con vendas ninja
+    const legs = [[0.36, 0.3], [0.36, -0.3], [-0.36, 0.3], [-0.36, -0.3]].map(([x, z], i) => {
+      const lp = new THREE.Group(); lp.position.set(x, 0.42, z);
+      const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.11, 0.32, 12), skin); leg.position.y = -0.16; lp.add(leg);
+      const paw = new THREE.Mesh(new THREE.SphereGeometry(0.13, 12, 8), skin); paw.scale.set(1.3, 0.6, 1.1); paw.position.set(0.04, -0.33, 0); lp.add(paw);
+      const wrap = new THREE.Mesh(new THREE.TorusGeometry(0.12, 0.03, 6, 16), accent); wrap.rotation.x = Math.PI / 2; wrap.position.y = -0.17; lp.add(wrap);
+      body.add(lp); lp.userData.phase = (i === 0 || i === 3) ? 0 : Math.PI; return lp;
+    });
+    const tailWag = new THREE.Group(); tailWag.position.set(-0.62, 0.45, 0); body.add(tailWag);
+    const tail = new THREE.Mesh(new THREE.ConeGeometry(0.07, 0.22, 10), skin); tail.rotation.z = Math.PI / 2; tail.position.x = -0.08; tailWag.add(tail);
+    group.scale.setScalar(CHAR_SCALE);
+    return { size: 1.0, name: 'DylonBaby30', group, body, head, legs, ears: [], tailWag, tongue, hurtMat: skin, reach: 0.95, speed: 9.5, mats: { coat: skin, dark: shell, light: belly, accent }, acc, headBow: null, noFur: true };
+  }
+
+  const chars = { dog: buildDog(), cat: buildCat(), rocco: buildRocco(), monkey: buildMonkey(), turtle: buildTurtle() };
   Object.values(chars).forEach(c => c.group.traverse(m => { if (m.isMesh) m.castShadow = true; }));
-  if (furTex) Object.values(chars).forEach(c => ['coat', 'dark', 'light'].forEach(k => {
+  if (furTex) Object.values(chars).filter(c => !c.noFur).forEach(c => ['coat', 'dark', 'light'].forEach(k => {
     const m = c.mats[k]; if (!m) return;
     m.map = furTex; m.bumpMap = furTex; m.bumpScale = 0.02; m.roughness = 0.88; m.needsUpdate = true;
   }));
@@ -1930,6 +1992,12 @@
       { id: 'platano', name: 'Plátano', colors: { coat: '#f0cf55', dark: '#c9a13a', light: '#fff4cf', accent: '#8ccf7e' }, acc: 'flowers', clothes: [['sweater', { c: '#ffffff', s: '#8ccf7e' }]], desc: 'camiseta de rayas verdes y corona de flores', req: { mode: 'city', n: 20 } },
       { id: 'chicle', name: 'Chicle', colors: { coat: '#f6a9c6', dark: '#e07fa6', light: '#fff0f6', accent: '#9fd3f0' }, acc: 'glasses', clothes: [['tutu', { c: '#a8ecf7' }], ['bandana', { c: '#ffffff' }]], desc: 'tutú turquesa, pañuelo y gafitas', req: { mode: 'city', n: 40 } },
       { id: 'selva', name: 'Rey de la selva', colors: { coat: '#5a4636', dark: '#3a2b20', light: '#e8d2b0', accent: '#f2c94c' }, acc: 'crown', clothes: [['cape', { c: '#3f8a4a' }], ['boots', { c: '#7a4a2e' }]], desc: 'capa de la selva, botas y corona', req: { mode: 'city', n: 60 } }
+    ],
+    turtle: [
+      { id: 'sombra', name: 'Sombra', colors: { coat: '#7cc576', dark: '#5f7f3e', light: '#e6d79a', accent: '#2b2b33' }, acc: null, req: null },
+      { id: 'cerezo', name: 'Cerezo', colors: { coat: '#8fd18a', dark: '#6e8f4a', light: '#f4e6b0', accent: '#f39bbb' }, acc: 'flowers', clothes: [['boots', { c: '#ffffff' }]], desc: 'traje ninja rosa, tabis blancos y corona de flores', req: { mode: 'city', n: 20 } },
+      { id: 'nube', name: 'Nube', colors: { coat: '#9fd6a0', dark: '#7aa6c9', light: '#f2f2e8', accent: '#f4f6fa' }, acc: 'glasses', clothes: [['bowtie', { c: '#7cc7f5' }]], desc: 'traje ninja blanco, caparazón azul, pajarita y gafitas', req: { mode: 'city', n: 40 } },
+      { id: 'shogun', name: 'Shogun', colors: { coat: '#6fb86a', dark: '#4a3a2c', light: '#e8d2a0', accent: '#c8324b' }, acc: 'crown', clothes: [['cape', { c: '#2b2b33' }]], desc: 'traje ninja rojo, capa negra y corona', req: { mode: 'city', n: 60 } }
     ]
   };
   const ACC_NAMES = { crown: 'con corona', flowers: 'con corona de flores', glasses: 'con gafitas rosas' };
@@ -2054,7 +2122,8 @@
     dog: { kind: 'cyl', cx: 0.03, cy: 0.8, len: 0.95, r: 0.42, neck: [0.76, 1.05], neckR: 0.33, legR: 0.12 },
     cat: { kind: 'ell', cx: 0, cy: 0.85, rx: 0.75, ry: 0.425, rz: 0.425, neck: [0.62, 1.07], neckR: 0.29, legR: 0.1 },
     rocco: { kind: 'ell', cx: 0.04, cy: 0.88, rx: 0.68, ry: 0.5, rz: 0.5, neck: [0.62, 1.12], neckR: 0.3, legR: 0.14 },
-    monkey: { kind: 'ell', cx: 0, cy: 0.92, rx: 0.53, ry: 0.46, rz: 0.43, neck: [0.44, 1.2], neckR: 0.28, legR: 0.1 }
+    monkey: { kind: 'ell', cx: 0, cy: 0.92, rx: 0.53, ry: 0.46, rz: 0.43, neck: [0.44, 1.2], neckR: 0.28, legR: 0.1 },
+    turtle: { kind: 'ell', cx: -0.02, cy: 0.56, rx: 0.64, ry: 0.4, rz: 0.55, neck: [0.6, 0.66], neckR: 0.15, legR: 0.12 }
   };
   const texCache = {};
   function clothTex(base, stripe, kind) {
@@ -2237,7 +2306,7 @@
     if (current.group.parent) current.group.parent.remove(current.group);
     current = chars[which];
     placeChar();
-    ['dog', 'cat', 'rocco', 'monkey'].forEach(k => $('pick-' + k).setAttribute('aria-pressed', which === k));
+    ['dog', 'cat', 'rocco', 'monkey', 'turtle'].forEach(k => $('pick-' + k).setAttribute('aria-pressed', which === k));
     curKey = which; applySkin(which); renderSkins();
     $('titleName').textContent = current.name;
     try { localStorage.setItem('salchi-lirios-char', which); } catch (e) {}
@@ -2305,6 +2374,7 @@
   $('pick-cat').addEventListener('click', () => pick('cat'));
   $('pick-rocco').addEventListener('click', () => pick('rocco'));
   $('pick-monkey').addEventListener('click', () => pick('monkey'));
+  $('pick-turtle').addEventListener('click', () => pick('turtle'));
   $('game-lily').addEventListener('click', () => selectGame('lily'));
   $('game-city').addEventListener('click', () => selectGame('city'));
   renderSkins();
@@ -2349,7 +2419,7 @@
     $('saveMsg').textContent = '¡Progreso recuperado! Tus récords, trajes y mundos ya están aquí.';
     sfx.unlock && ac && sfx.unlock();
   });
-  try { const sc = localStorage.getItem('salchi-lirios-char'); if (sc === 'cat' || sc === 'rocco' || sc === 'monkey') pick(sc); } catch (e) {}
+  try { const sc = localStorage.getItem('salchi-lirios-char'); if (sc === 'cat' || sc === 'rocco' || sc === 'monkey' || sc === 'turtle') pick(sc); } catch (e) {}
   selectGame('city');   // el juego de los lirios ya no está en el menú
 
   function renderHearts() { [...ui.hearts.children].forEach((h, i) => h.classList.toggle('lost', i >= lives)); }

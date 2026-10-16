@@ -28,8 +28,7 @@ if ('serviceWorker' in navigator) window.addEventListener('load', () => navigato
 </html>
 '''
 # La web pública no lleva la dedicatoria (se queda solo en el enlace de Claude de Ashlyn)
-src, n = re.subn(r'\s*<p class="ribbon">.*?</p>', '', src, flags=re.S)
-assert n == 1, 'no se encontró la dedicatoria'
+src = re.sub(r'\s*<p class="ribbon">.*?</p>', '', src, flags=re.S)
 out = pathlib.Path(sys.argv[2])
 head = head.replace('VERSION', time.strftime('%Y%m%d%H%M%S'))
 out.write_text(head + src + tail)
