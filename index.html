@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#fde7ef">
-<meta name="salchi-version" content="20261016020323">
+<meta name="salchi-version" content="20261016020727">
 <meta name="description" content="Salchi y los lirios: juegos 3D con Salchi, Miso, Rocco y Samu.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
@@ -206,6 +206,21 @@
   }
   .logo em { display: block; font-size: .46em; font-weight: 600; margin-top: 4px; -webkit-text-stroke: 1px #6b3a4b; }
   @keyframes floaty { 0%, 100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-5px) rotate(1deg); } }
+  .upd {
+    margin-top: 6px; display: inline-flex; align-items: center; gap: 8px; border: 0; cursor: pointer;
+    font: 800 15px var(--body); color: #fff; padding: 10px 18px 11px; border-radius: 999px;
+    background: linear-gradient(180deg, #b79cf5 0%, #8f6fe6 100%);
+    box-shadow: inset 0 2px 0 rgba(255,255,255,.55), 0 4px 0 #6a4fc0, 0 10px 22px rgba(106,79,192,.4);
+    text-shadow: 0 1px 0 rgba(70,40,140,.5); transition: transform .08s, box-shadow .08s;
+  }
+  .upd .ico { font-size: 19px; line-height: 1; display: inline-block; }
+  .upd:active { transform: translateY(3px); box-shadow: inset 0 2px 0 rgba(255,255,255,.55), 0 1px 0 #6a4fc0, 0 5px 12px rgba(106,79,192,.35); }
+  .upd.busy .ico { animation: spin .8s linear infinite; }
+  .upd.new { background: linear-gradient(180deg, #7fe0a8 0%, #2fb877 100%); box-shadow: inset 0 2px 0 rgba(255,255,255,.55), 0 4px 0 #1f8a57, 0 10px 22px rgba(31,138,87,.45); text-shadow: 0 1px 0 rgba(20,90,55,.5); animation: pulse 1.4s ease-in-out infinite; }
+  .upd.ok { background: linear-gradient(180deg, #ffffff 0%, #f1e9ff 100%); color: #6a4fc0; text-shadow: none; box-shadow: inset 0 2px 0 #fff, 0 4px 0 #d9ccf7, 0 8px 16px rgba(106,79,192,.18); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+  @media (prefers-reduced-motion: reduce) { .upd.new, .upd.busy .ico { animation: none; } }
   .stage { flex: 1 1 auto; min-height: 90px; width: 100%; position: relative; pointer-events: none; }
   .pedestal { position: absolute; left: 50%; bottom: 10px; width: 150px; height: 26px; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(107,58,75,.22), rgba(107,58,75,0)); }
   .sheet {
@@ -313,6 +328,7 @@
 <div class="menu" id="menu">
   <header class="brand" id="brand">
     <h1 class="logo"><span id="titleName">Salchi</span><em id="titleSub">y los lirios</em></h1>
+    <button class="upd" id="updTop" hidden><span class="ico" aria-hidden="true">↻</span><span class="txt" id="updTxt">Buscar actualización</span></button>
   </header>
   <div class="stage" aria-hidden="true"><span class="pedestal"></span></div>
   <section class="sheet" id="sheet" aria-label="Menú del juego">
@@ -2388,21 +2404,41 @@
   // Buscar actualización: compara el número de versión de la web con el de esta copia y recarga si hay una nueva
   const verMeta = document.querySelector('meta[name="salchi-version"]');
   if (verMeta) {
-    $('updateBox').hidden = false;
-    $('checkUpdate').addEventListener('click', async () => {
-      const msg = $('updateMsg');
-      msg.textContent = 'Buscando…';
+    const top = $('updTop'), topTxt = $('updTxt'), msg = $('updateMsg');
+    let hasNew = false, busy = false;
+    const setTop = (cls, txt) => { top.className = 'upd' + (cls ? ' ' + cls : ''); topTxt.textContent = txt; setTimeout(measureMenu, 30); };
+    async function latestVersion() {
+      const res = await fetch('./?v=' + Date.now(), { cache: 'no-store' });
+      const m = (await res.text()).match(/name="salchi-version" content="([^"]+)"/);
+      return m ? m[1] : null;
+    }
+    async function applyUpdate() {
+      setTop('busy', 'Actualizando…'); msg.textContent = 'Actualizando…';
+      try { const ks = await caches.keys(); await Promise.all(ks.map(k => caches.delete(k))); } catch (e) {}
+      try { const regs = await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r => r.update())); } catch (e) {}
+      setTimeout(() => location.reload(), 350);
+    }
+    async function check(apply) {
+      if (busy) return; busy = true;
+      if (apply) { setTop('busy', 'Buscando actualización…'); msg.textContent = 'Buscando…'; }
       try {
-        const res = await fetch('./?v=' + Date.now(), { cache: 'no-store' });
-        const html = await res.text();
-        const m = html.match(/name="salchi-version" content="([^"]+)"/);
-        if (m && m[1] !== verMeta.content) {
-          msg.textContent = 'Hay una versión nueva. Actualizando…';
-          try { const ks = await caches.keys(); await Promise.all(ks.map(k => caches.delete(k))); } catch (e) {}
-          setTimeout(() => location.reload(), 400);
-        } else msg.textContent = 'Ya tienes la última versión.';
-      } catch (e) { msg.textContent = 'No se ha podido comprobar. Revisa tu conexión a internet.'; }
-    });
+        const v = await latestVersion();
+        hasNew = !!v && v !== verMeta.content;
+        if (hasNew) {
+          if (apply) { busy = false; return applyUpdate(); }
+          setTop('new', '¡Nueva versión! Toca para actualizar');
+          msg.textContent = 'Hay una versión nueva disponible.';
+        } else if (apply) { setTop('ok', '✓ Tienes la última versión'); msg.textContent = 'Ya tienes la última versión.'; setTimeout(() => { if (!hasNew) setTop('', 'Buscar actualización'); }, 3500); }
+      } catch (e) { if (apply) { setTop('', 'Sin conexión. Toca para reintentar'); msg.textContent = 'No se ha podido comprobar. Revisa tu conexión a internet.'; } }
+      busy = false;
+    }
+    const onTap = () => { if (hasNew) applyUpdate(); else check(true); };
+    top.hidden = false; $('updateBox').hidden = false;
+    top.addEventListener('click', onTap);
+    $('checkUpdate').addEventListener('click', onTap);
+    // Al abrir el juego se comprueba solo, sin molestar: si hay versión nueva, el botón se pone verde y late
+    setTimeout(() => check(false), 1200);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && state === 'menu') check(false); });
   }
   cloudInit();
   $('copyCode').addEventListener('click', () => {
