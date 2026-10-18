@@ -5,3 +5,7 @@ Juegos 3D: **Lluvia de lirios** y **Cruza la ciudad** (con mundos de hielo, desi
 Juega aquí: https://samupro08416-spec.github.io/salchi/
 
 En el móvil, usa «Añadir a pantalla de inicio» para tenerlo como una app.
+
+## Bocado (macros y comidas)
+
+Calculadora de macros, diario de comidas, agua según tu peso y progreso: https://samupro08416-spec.github.io/salchi/macros/
