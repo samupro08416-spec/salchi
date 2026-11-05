@@ -1,0 +1,648 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#050d0c"><meta name="description" content="Museo de lo Invisible: pasaporte de sellos, juegos y los 16 puestos del Día Internacional de la Radiología."><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style><title>Museo de lo Invisible</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800;900&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@1,400;1,500&display=swap">
+<style>
+/* Layout: una sola columna de "salas" a sangre, cada una con el color de su cartel; contenido centrado a 1120px */
+:root{
+  color-scheme: dark;
+  --ink:#050d0c; --panel:#0c1817; --line:rgba(230,255,248,.13);
+  --fg:#f2f7f5; --muted:#a3b8b3;
+  --pink:#ff7ad9; --cyan:#6ef3ff; --yellow:#ffe14d; --lime:#c8ff3d; --orange:#ff6a3d; --blue:#1f2ef0;
+  --cream:#fbf4e4; --navy:#1f2a6b; --red:#dc3d2f; --paper-ink:#1f2a6b;
+  --display:"Inter Tight","Arial Black",system-ui,sans-serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Lora",Georgia,"Times New Roman",serif;
+  --wrap:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--ink);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.035em;line-height:.92}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:6px}
+img{display:block}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+
+/* Barra superior */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(5,13,12,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:16px;padding-block:10px}
+.brand{font-family:var(--serif);font-style:italic;font-size:19px;white-space:nowrap;background:none;border:0;padding:0}
+.nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.nav::-webkit-scrollbar{display:none}
+.nav button{background:none;border:0;padding:8px 10px;font-size:14px;font-weight:600;color:var(--muted);white-space:nowrap;border-radius:999px}
+.nav button:hover{color:var(--fg);background:rgba(255,255,255,.06)}
+.pill{display:flex;align-items:center;gap:8px;background:var(--cream);color:var(--navy);border:0;border-radius:999px;padding:6px 12px 6px 8px;font-weight:800;font-family:var(--display);font-size:15px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pill i{width:20px;height:20px;border-radius:50%;border:2.5px solid var(--red);display:block;position:relative}
+.pill i::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--red)}
+@media (max-width:719px){.nav{display:none}.bar .wrap{justify-content:space-between}}
+.bar .subnav{display:none}
+@media (max-width:719px){.bar .subnav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-block:0 10px}.subnav::-webkit-scrollbar{display:none}
+.subnav button{flex:none;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600}}
+
+/* Portada */
+.hero{background:radial-gradient(120% 80% at 75% 30%,#0b4a40 0%,#062420 45%,var(--ink) 100%);padding-block:40px 56px;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.hero h1{white-space:nowrap;font-size:clamp(64px,17vw,124px);font-weight:900;color:var(--pink);letter-spacing:-.06em;margin:14px 0 18px;line-height:.85}
+.hero .lead{font-size:clamp(19px,2.2vw,24px);font-weight:600;max-width:30ch;line-height:1.3}
+.hero .lead em{font-family:var(--serif);font-weight:400;color:var(--pink)}
+.when{margin-top:28px;background:#fff;color:#0a0a0a;padding:18px 22px;max-width:470px}
+.when strong{display:block;font-family:var(--display);font-weight:900;font-size:clamp(22px,3vw,30px);letter-spacing:-.04em;line-height:1.05}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:13px 20px;font-weight:700;font-size:16px;min-height:48px}
+.btn.primary{background:var(--pink);color:#21051a}
+.btn.ghost{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 2px #fff}
+@media (max-width:819px){.hero .wrap{grid-template-columns:1fr;gap:28px}.hero{padding-block:24px 44px}}
+
+/* Escáner de rayos X */
+.scan-fig{margin:0;justify-self:center;width:100%;max-width:400px}
+.scan{position:relative;aspect-ratio:3/4;width:100%;max-width:100%;background:#000;overflow:hidden;touch-action:none;cursor:crosshair;border-radius:4px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.scan img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.scan .ghost{opacity:.16;filter:blur(2px)}
+.scan .lens{position:absolute;inset:0;--x:50%;--y:42%;--r:30%;
+  -webkit-mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),#000 96%,transparent 100%);
+          mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),#000 96%,transparent 100%)}
+.scan .lens::after{content:"";position:absolute;inset:0;background:var(--cyan);mix-blend-mode:multiply}
+.scan .ring{position:absolute;width:60%;aspect-ratio:1;border-radius:50%;border:2px solid var(--cyan);transform:translate(-50%,-50%);pointer-events:none;box-shadow:0 0 30px rgba(110,243,255,.35)}
+.scan-fig figcaption{display:flex;justify-content:space-between;gap:12px;margin-top:10px;font-size:13px;color:var(--muted)}
+.scan-fig figcaption b{color:var(--cyan);font-weight:600}
+@media (max-width:819px){.scan-fig{max-width:300px}}
+
+/* Secciones */
+section{scroll-margin-top:70px}
+.sec{padding-block:64px}
+.sec-head{display:grid;gap:12px;margin-bottom:28px;max-width:720px}
+.sec-head h2{font-size:clamp(44px,8vw,92px);font-weight:900}
+.sec-head p{font-size:18px;color:var(--muted);max-width:60ch}
+
+/* Pasaporte */
+#pasaporte{background:var(--orange);padding-block:40px}
+.passport{background:var(--cream);color:var(--paper-ink);border-radius:28px;padding:clamp(22px,4vw,48px);box-shadow:0 20px 60px rgba(80,20,0,.25)}
+.passport .top{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end}
+.passport .eyebrow{color:var(--paper-ink)}
+.passport h2{font-size:clamp(48px,9vw,104px);font-weight:900;color:var(--navy);margin-top:10px}
+.passport h2 span{display:block;font-family:var(--serif);font-style:italic;font-weight:400;color:var(--red);letter-spacing:-.02em;line-height:1}
+.passport .intro{margin-top:14px;font-size:18px;font-weight:500;max-width:46ch}
+.count{text-align:right;font-family:var(--display);font-weight:900;color:var(--navy);line-height:.9;font-variant-numeric:tabular-nums}
+.count b{font-size:clamp(56px,9vw,96px);letter-spacing:-.05em}
+.count small{display:block;font-family:var(--body);font-weight:600;font-size:14px;letter-spacing:0;color:var(--paper-ink);margin-top:6px}
+.segs{display:grid;grid-template-columns:repeat(16,1fr);gap:4px;margin:24px 0 26px}
+.segs i{height:8px;border-radius:4px;background:rgba(31,42,107,.14)}
+.segs i.on{background:var(--red)}
+.codeform{display:flex;flex-wrap:wrap;gap:10px;align-items:end;padding:18px;border:2px dashed rgba(31,42,107,.35);border-radius:18px}
+.codeform label{display:grid;gap:6px;flex:1 1 220px;font-weight:700;font-size:14px}
+.codeform input::placeholder{font-family:var(--body);font-weight:500;font-size:17px;letter-spacing:0;text-transform:none;color:rgba(31,42,107,.5)}
+.codeform input{font:inherit;font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);background:#fff;border:2px solid var(--navy);border-radius:12px;padding:10px 14px;min-height:52px;width:100%}
+.codeform .btn{background:var(--navy);color:var(--cream);min-height:52px}
+.codeform .msg{flex-basis:100%;font-weight:600;font-size:15px;min-height:1.4em}
+.codeform .msg.bad{color:var(--red)}
+.codeform .hint{flex-basis:100%;font-size:14px;opacity:.75}
+.stamps{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,2.4vw,28px);margin-top:28px;list-style:none;padding:0}
+.stamp{position:relative;width:100%;display:grid;gap:6px;justify-items:center;background:none;border:0;padding:0;color:var(--navy)}
+.stamp .disc{position:relative;width:100%;aspect-ratio:1;max-width:100%}
+.stamp svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.stamp .img{position:absolute;inset:17%;border-radius:50%;overflow:hidden;background:rgba(31,42,107,.06)}
+.stamp .img img{width:100%;height:100%;object-fit:cover}
+.stamp .num{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:clamp(18px,4vw,40px);color:rgba(31,42,107,.35)}
+.cap{color:var(--navy);font-size:clamp(11px,1.6vw,14px);font-weight:600;line-height:1.2;text-align:center;max-width:16ch}
+.stamp:not(.on) svg{opacity:.4}
+.stamp:not(.on) .img img{display:none}
+.stamp:not(.on) .img{border:2px dashed rgba(31,42,107,.4);background:transparent}
+.stamp.on .num{display:none}
+.stamp.on .disc{transform:rotate(var(--rot))}
+.stamp.red{color:var(--red)}
+.stamp.fresh .disc{animation:stamp .55s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes stamp{0%{transform:scale(1.8) rotate(0);opacity:0;filter:blur(4px)}60%{opacity:1;filter:none}100%{transform:scale(1) rotate(var(--rot))}}
+@media (max-width:520px){.cap{display:none!important}}
+.prize{margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.prize .card{border-radius:18px;padding:22px;background:#fff}
+.prize h3{font-size:30px;font-weight:900;color:var(--navy)}
+.prize .card p{margin-top:8px}
+.prize .code{margin-top:14px;display:inline-block;background:var(--red);color:#fff;font-family:var(--display);font-weight:900;font-size:clamp(34px,6vw,52px);letter-spacing:.02em;padding:8px 18px;border-radius:12px;font-variant-numeric:tabular-nums}
+.prize .locked{background:transparent;border:2px dashed rgba(31,42,107,.35)}
+.prize label{display:grid;gap:6px;font-weight:700;margin-top:14px;font-size:15px}
+.prize textarea{font:inherit;font-size:16px;color:var(--navy);background:var(--cream);border:2px solid rgba(31,42,107,.3);border-radius:12px;padding:10px 12px;min-height:76px;resize:vertical;width:100%}
+.prize .saved{font-size:13px;opacity:.7;margin-top:10px;min-height:1.3em}
+.reset{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:14px}
+.reset button{background:none;border:0;text-decoration:underline;padding:6px 0;color:var(--navy)}
+.reset .danger{color:var(--red);font-weight:700}
+@media (max-width:719px){.prize{grid-template-columns:1fr}.passport .top{grid-template-columns:1fr}.count{text-align:left}}
+
+/* Juego ¿Qué es? */
+#juego{--bg:#04231f;--ac:var(--pink);background:var(--bg);transition:background .5s}
+.game{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:center}
+.game h2{font-size:clamp(64px,12vw,150px);font-weight:900;color:var(--ac);letter-spacing:-.06em;transition:color .5s}
+.game .meta{display:flex;gap:16px;align-items:center;margin-bottom:16px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.game .meta b{color:var(--fg)}
+.game .sub{margin:16px 0 22px;font-size:18px;font-weight:500}
+.shot{position:relative;aspect-ratio:4/5;max-width:100%;overflow:hidden;background:#000;border-radius:4px}
+.shot img{width:100%;height:100%;object-fit:cover;transition:opacity .3s}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.18);border-radius:14px;padding:14px;min-height:60px;font-weight:700;font-size:16px;text-align:left;line-height:1.2}
+.opt:hover:not(:disabled){border-color:var(--ac)}
+.opt:disabled{cursor:default}
+.opt.right{background:var(--ac);border-color:var(--ac);color:#0a0a0a}
+.opt.wrong{border-color:#ff9a8a;background:rgba(255,90,60,.18)}
+.feedback{margin-top:16px;padding:16px 18px;background:rgba(0,0,0,.35);border-left:4px solid var(--ac);border-radius:4px}
+.feedback b{display:block;font-family:var(--display);font-size:22px;font-weight:900;letter-spacing:-.02em;margin-bottom:4px}
+.feedback .btn{margin-top:14px;background:var(--ac);color:#0a0a0a}
+.final{text-align:left}
+.final .big{font-family:var(--display);font-weight:900;font-size:clamp(56px,10vw,110px);color:var(--ac);letter-spacing:-.05em;line-height:.9}
+@media (max-width:819px){.game{grid-template-columns:1fr;gap:18px}.game .shot{order:-1;aspect-ratio:5/4;max-height:46vh;width:100%}.game h2{font-size:clamp(52px,15vw,90px)}.game .sub{margin:10px 0 16px}}
+
+/* ¿Qué hace esto ahí? */
+#objetos{background:#07090a}
+#objetos .sec-head h2{color:#fff}
+#objetos .sec-head h2 span{color:var(--lime)}
+.flips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.flip{position:relative;background:none;border:0;padding:0;perspective:1200px;aspect-ratio:4/3;width:100%;max-width:100%;text-align:left}
+.flip .in{position:absolute;inset:0;transition:transform .7s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.flip.open .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;border-radius:4px}
+.face.front{background:#000}
+.face.front img{width:100%;height:100%;object-fit:cover}
+.face.front .tag{position:absolute;left:0;bottom:0;background:var(--lime);color:#0a0a0a;font-weight:800;font-size:15px;padding:8px 14px}
+.face.back{background:var(--lime);color:#0a0a0a;transform:rotateY(180deg);padding:clamp(16px,3vw,28px);display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
+.face.back h3{font-size:clamp(22px,3.2vw,36px);font-weight:900}
+.face.back p{font-size:clamp(14px,1.6vw,17px);font-weight:500;line-height:1.4}
+@media (prefers-reduced-motion:reduce){.flip .in{transition:none}}
+@media (max-width:640px){.flips{grid-template-columns:1fr}}
+
+/* Puestos */
+#puestos{background:var(--ink)}
+.groups{display:grid;gap:40px}
+.group h3{font-family:var(--serif);font-style:italic;font-weight:400;font-size:28px;letter-spacing:0;margin-bottom:12px;color:var(--muted)}
+.plist{display:grid;gap:10px}
+details.p{border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden}
+details.p[open]{border-color:var(--c)}
+details.p summary{list-style:none;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 16px;cursor:pointer}
+details.p summary::-webkit-details-marker{display:none}
+.pn{width:46px;height:46px;border-radius:50%;background:var(--c);color:#0a0a0a;display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:20px;font-variant-numeric:tabular-nums}
+.pt{min-width:0}
+.pt b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(18px,2.2vw,22px);letter-spacing:-.02em;line-height:1.15}
+.pt span{display:block;color:var(--muted);font-size:14px;margin-top:2px}
+.chip{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.chip.on{background:var(--cream);color:var(--red);border-color:var(--cream)}
+.pbody{padding:0 16px 20px 76px;display:grid;gap:14px;max-width:820px}
+.dato{background:rgba(255,255,255,.04);border-radius:12px;padding:14px 16px}
+.dato .eyebrow,.reto .eyebrow{color:var(--c);font-size:11px}
+.dato p{margin-top:6px;font-size:17px;line-height:1.5}
+.reto p.q{margin-top:6px;font-weight:600;font-size:17px}
+.flap{margin-top:10px;position:relative;border-radius:12px;overflow:hidden}
+.flap .ans{padding:14px 16px;background:rgba(255,255,255,.06);font-size:16px}
+.flap button{position:absolute;inset:0;width:100%;border:0;background:var(--c);color:#0a0a0a;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;transform-origin:top;transition:transform .5s cubic-bezier(.4,.1,.2,1)}
+.flap.open button{transform:rotateX(-100deg);pointer-events:none}
+@media (prefers-reduced-motion:reduce){.flap button{transition:none}.flap.open button{display:none}}
+.go{justify-self:start;background:var(--c);color:#0a0a0a}
+.votes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}
+.vote{background:none;border:2px solid transparent;border-radius:14px;padding:6px;display:grid;gap:6px;justify-items:center;font-size:13px;font-weight:600}
+.vote img{width:100%;aspect-ratio:1;border-radius:50%;object-fit:cover;max-width:100%}
+.vote.sel{border-color:var(--c);background:rgba(255,122,217,.1)}
+.votemsg{font-size:14px;color:var(--muted);margin-top:8px}
+@media (max-width:600px){.pbody{padding:0 16px 18px}.pn{width:40px;height:40px;font-size:17px}details.p summary{gap:12px;padding:12px}}
+
+/* Info */
+#info{background:#fff;color:#0a0a0a}
+.info{display:grid;grid-template-columns:1.1fr .9fr;gap:40px}
+.info .big{font-family:var(--display);font-weight:900;font-size:clamp(34px,5.5vw,64px);letter-spacing:-.045em;line-height:.98}
+.info h3{font-family:var(--display);font-size:20px;letter-spacing:-.01em;margin:0 0 8px}
+.info ul{margin:0;padding-left:18px;display:grid;gap:6px}
+.info .col{display:grid;gap:24px;align-content:start}
+.info small{font-size:13px;color:#4a4a4a;line-height:1.5;display:block}
+.info .privacy{background:#f1f1ee;border-radius:12px;padding:14px 16px;font-size:15px}
+@media (max-width:819px){.info{grid-template-columns:1fr}}
+
+/* Aviso de sello */
+.modal{position:fixed;inset:0;z-index:80;display:grid;place-items:center;background:rgba(3,8,8,.78);padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.modal .box{background:var(--cream);color:var(--navy);border-radius:24px;padding:28px 24px;max-width:360px;width:100%;text-align:center;display:grid;gap:10px;justify-items:center}
+.modal .stamp{width:190px;pointer-events:none}
+.modal h3{font-size:34px;font-weight:900;color:var(--navy)}
+.modal p{font-weight:500}
+.modal .btn{background:var(--navy);color:var(--cream);margin-top:6px}
+</style>
+
+</head><body>
+<header class="bar">
+  <div class="wrap">
+    <button class="brand" data-go="inicio">Museo de lo Invisible</button>
+    <nav class="nav" aria-label="Secciones">
+      <button data-go="pasaporte">Pasaporte</button>
+      <button data-go="juego">¿Qué es?</button>
+      <button data-go="objetos">¿Qué hace esto ahí?</button>
+      <button data-go="puestos">Los 16 puestos</button>
+      <button data-go="info">Info</button>
+    </nav>
+    <button class="pill" data-go="pasaporte" aria-label="Mi pasaporte"><i></i><span id="pillCount">0/16</span></button>
+  </div>
+  <div class="wrap subnav" aria-label="Secciones">
+    <button data-go="pasaporte">Pasaporte</button>
+    <button data-go="juego">¿Qué es?</button>
+    <button data-go="objetos">¿Qué hace esto ahí?</button>
+    <button data-go="puestos">Puestos</button>
+    <button data-go="info">Info</button>
+  </div>
+</header>
+
+<section id="inicio" class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Día Internacional de la Radiología</p>
+      <h1>¿QUÉ ES?</h1>
+      <p class="lead">Míralo bien. Lo llevas contigo todos los días. <em>Bienvenido al Museo de lo Invisible.</em></p>
+      <div class="when"><strong>Lunes 9 de noviembre<br>De 10:30 a 13:00 en el Ágora</strong></div>
+      <div class="ctas">
+        <button class="btn primary" data-go="pasaporte">Abrir mi pasaporte</button>
+        <button class="btn ghost" data-go="juego">Jugar a ¿Qué es?</button>
+      </div>
+    </div>
+    <figure class="scan-fig">
+      <div class="scan" id="scan" role="img" aria-label="Radiografía de una mano que se revela al pasar el dedo por encima">
+        <img class="ghost" src="img/mano.webp" alt="">
+        <div class="lens" id="lens"><img src="img/mano.webp" alt=""></div>
+        <div class="ring" id="ring"></div>
+      </div>
+      <figcaption><b>Pasa el dedo por encima</b><span>Escáner de lo invisible</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="pasaporte">
+  <div class="wrap">
+    <div class="passport">
+      <div class="top">
+        <div>
+          <p class="eyebrow">Pasaporte del museo</p>
+          <h2>Colecciona <span>lo invisible</span></h2>
+          <p class="intro">Recorre la exposición, consigue los 16 sellos y llévate un premio sorpresa. Escanea el QR de cada puesto o escribe aquí su código.</p>
+        </div>
+        <div class="count"><b id="count">0</b><b style="opacity:.3">/16</b><small>sellos conseguidos</small></div>
+      </div>
+      <div class="segs" id="segs" aria-hidden="true"></div>
+      <form class="codeform" id="codeform" autocomplete="off">
+        <label for="code">Código del puesto
+          <input id="code" name="code" inputmode="text" autocapitalize="characters" spellcheck="false" placeholder="Escribe el código">
+        </label>
+        <button class="btn" type="submit">Sellar</button>
+        <p class="msg" id="msg" role="status" aria-live="polite"></p>
+        <p class="hint">El código está en el cartel de cada puesto. Pídeselo al equipo cuando termines la visita.</p>
+      </form>
+      <ul class="stamps" id="stamps"></ul>
+      <div class="prize">
+        <div class="card" id="prizeCard"></div>
+        <div class="card">
+          <h3>Antes de irte</h3>
+          <p>Dos preguntas rápidas. Tus respuestas se quedan en este móvil.</p>
+          <label for="q1">¿Qué puesto o imagen te ha sorprendido más?
+            <textarea id="q1" rows="2"></textarea></label>
+          <label for="q2">¿Qué has aprendido que no sabías?
+            <textarea id="q2" rows="2"></textarea></label>
+          <p class="saved" id="saved" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="reset" id="reset">
+        <button type="button" id="resetAsk">Empezar el pasaporte de cero</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="juego" class="sec">
+  <div class="wrap game" id="game"></div>
+</section>
+
+<section id="objetos" class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>¿QUÉ HACE <span>ESTO</span> AHÍ?</h2>
+      <p>Objetos que no deberían estar donde están, animales por dentro y cosas vistas con rayos X. Toca cada imagen para descubrir qué es.</p>
+    </div>
+    <div class="flips" id="flips"></div>
+  </div>
+</section>
+
+<section id="puestos" class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Los 16 puestos</h2>
+      <p>Cada puesto tiene un dato que sorprende y un reto. Ábrelo, intenta responder y levanta la solapa para ver la solución.</p>
+    </div>
+    <div class="groups" id="groups"></div>
+  </div>
+</section>
+
+<section id="info" class="sec">
+  <div class="wrap info">
+    <div class="col">
+      <p class="big">Museo de lo Invisible<br>Lunes 9 de noviembre<br>De 10:30 a 13:00 en el Ágora</p>
+      <div class="privacy">Tu pasaporte y tus respuestas se guardan solo en este móvil. No te pedimos el nombre ni ningún dato personal.</div>
+    </div>
+    <div class="col">
+      <div>
+        <h3>Normas del museo</h3>
+        <ul>
+          <li>Aquí nadie recibe radiación: no hay ningún equipo encendido.</li>
+          <li>Los casos son anónimos y sin imágenes desagradables.</li>
+          <li>Todas las imágenes indican su autor y su licencia.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Quién lo hace</h3>
+        <small>Organiza: alumnado de 1.º y 2.º del Grado Superior en Imagen para el Diagnóstico y Medicina Nuclear.<br>Cartelería y web: alumnado del Grado Superior en Marketing y Publicidad.</small>
+      </div>
+      <div>
+        <h3>Créditos de las imágenes</h3>
+        <small>Radiografías adaptadas de Wikimedia Commons: Mikael Häggström, M.D. (CC0); Nevit Dilmen (CC BY-SA 3.0); A. Schuster (CC BY 4.0); T. Quine (CC BY 2.0); I. Richardson (CC BY-SA 2.0); W. König y autor anónimo (dominio público). Colores y recortes: cartelería del museo.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="box">
+    <div id="mStamp"></div>
+    <h3 id="mTitle">¡Sello conseguido!</h3>
+    <p id="mText"></p>
+    <button class="btn" id="mClose">Ver mi pasaporte</button>
+  </div>
+</div>
+
+<script>
+/* ===== Configuración: los equipos pueden cambiar los códigos aquí ===== */
+const PUESTOS = [
+ {n:1,g:"ciclo",c:"--yellow",code:"ESTRIBO",t:"Los orígenes de la radiología",s:"Röntgen y las primeras radiografías",
+  d:"Cómo un físico alemán descubrió por casualidad unos rayos capaces de atravesar el cuerpo, y cómo eran los primeros equipos.",
+  dato:"Wilhelm Röntgen descubrió los rayos X el 8 de noviembre de 1895. Por eso el Día Internacional de la Radiología se celebra cada 8 de noviembre. Una de sus primeras radiografías fue la mano de su mujer, Anna Bertha, con el anillo puesto.",
+  q:"¿Por qué se llaman rayos «X»?",a:"Porque Röntgen no sabía qué eran. En matemáticas, la X es lo desconocido, y el nombre se quedó."},
+ {n:2,g:"ciclo",c:"--pink",code:"ROTULA",t:"El cuerpo humano por dentro",s:"Anatomía y planos: axial, coronal y sagital",
+  d:"Anatomía en imágenes y una idea clave: para orientarse dentro del cuerpo, los técnicos lo «cortan» en tres planos.",
+  dato:"Un bebé nace con unos 300 huesos, pero un adulto tiene 206. Muchos se van uniendo mientras crecemos.",
+  q:"Si cortas el cuerpo de perfil, separando la mitad izquierda de la derecha, ¿qué plano es: axial, coronal o sagital?",a:"Sagital. El axial corta en rodajas de arriba abajo, como un pan de molde, y el coronal separa la parte de delante de la de atrás."},
+ {n:3,g:"ciclo",c:"--cyan",code:"CUBITO",t:"¿Cómo se forma una imagen?",s:"Equipo de rayos X, atenuación y detectores",
+  d:"Qué pasa dentro de un equipo de rayos X y por qué unas zonas salen blancas y otras negras.",
+  dato:"Una radiografía es, en el fondo, una sombra. El hueso frena muchos rayos X y sale blanco; el aire casi no los frena y sale negro.",
+  q:"En una radiografía de tórax, ¿de qué color salen los pulmones?",a:"Negros o gris muy oscuro. Están llenos de aire, y el aire deja pasar casi todos los rayos X hasta el detector."},
+ {n:4,g:"ciclo",c:"--lime",code:"RADIO",t:"Radiología segura",s:"Protección radiológica y principio ALARA",
+  d:"Cómo se protege a pacientes y profesionales: dosímetros, blindajes y la regla de oro ALARA.",
+  dato:"ALARA viene del inglés «As Low As Reasonably Achievable»: usar la dosis más baja que permita obtener una buena imagen. Una radiografía de tórax da una dosis parecida a la radiación natural que recibimos en unos 10 días.",
+  q:"¿Una ecografía usa radiación ionizante, como los rayos X?",a:"No. La ecografía usa ultrasonidos y la resonancia usa un imán y ondas de radio. Ninguna de las dos usa radiación ionizante."},
+ {n:5,g:"ciclo",c:"--orange",code:"TIBIA",t:"Radiología convencional y técnicas especiales",s:"Proyecciones, contraste, mamografía e intervencionismo",
+  d:"Radiografías, proyecciones, estudios con contraste, mamografía y radiología intervencionista.",
+  dato:"Los órganos huecos, como el estómago, casi no se ven en una radiografía normal. Para verlos se usa un contraste: un líquido (por ejemplo, con bario) que los «pinta» de blanco por dentro.",
+  q:"¿Por qué muchas veces se hacen dos radiografías de la misma zona, una de frente y otra de lado?",a:"Porque una radiografía aplana en 2D algo que es 3D. Con dos ángulos se sabe dónde está cada cosa, y lo que queda tapado en una vista aparece en la otra."},
+ {n:6,g:"ciclo",c:"--cyan",code:"PERONE",t:"TC y ecografía",s:"Cortes, reconstrucciones 3D y ultrasonidos",
+  d:"El TC (o TAC) hace cortes del cuerpo con rayos X que giran alrededor del paciente. La ecografía usa ultrasonidos.",
+  dato:"Los ultrasonidos de una ecografía son sonidos tan agudos que el oído humano no los puede oír. Funcionan como un sonar: la máquina escucha el eco que rebota en los órganos.",
+  q:"¿Qué animal usa el mismo truco que un ecógrafo para «ver» en la oscuridad?",a:"El murciélago (y también el delfín). Emiten sonidos y se orientan con el eco que les devuelve lo que tienen alrededor."},
+ {n:7,g:"ciclo",c:"--pink",code:"FEMUR",t:"Resonancia magnética",s:"Imán, señales, T1 y T2, seguridad",
+  d:"Un imán enorme y ondas de radio para ver el cuerpo con mucho detalle. Qué significan T1 y T2 y por qué hay tantas normas de seguridad.",
+  dato:"El imán de una resonancia es decenas de miles de veces más potente que el campo magnético de la Tierra. Y está siempre encendido, aunque no haya nadie dentro.",
+  q:"Si la máquina no está haciendo ninguna prueba, ¿puedes entrar a la sala con las llaves en el bolsillo?",a:"No. El imán sigue activo y puede atraer con mucha fuerza los objetos de metal. Por eso se revisa a todo el mundo antes de entrar."},
+ {n:8,g:"ciclo",c:"--yellow",code:"ATLAS",t:"Medicina nuclear",s:"Gammagrafía, SPECT, PET y radiofármacos",
+  d:"Pruebas que muestran cómo funcionan los órganos, no solo cómo son.",
+  dato:"En medicina nuclear la radiación no viene de la máquina: se administra al paciente un radiofármaco y la cámara capta lo que emite desde dentro del cuerpo.",
+  q:"En un PET, ¿de dónde sale la radiación que forma la imagen?",a:"Del propio paciente. El radiofármaco se reparte por el cuerpo y se acumula más en las zonas que más trabajan."},
+ {n:9,g:"curio",c:"--lime",code:"AXIS",t:"Objetos cotidianos vistos por dentro",s:"Juguetes, cámaras, zapatos, instrumentos y fruta",
+  d:"¿Qué esconden un juguete, una cámara, un zapato, un instrumento musical o una fruta?",
+  dato:"El metal frena casi todos los rayos X. Por eso pilas, monedas y tornillos salen blanquísimos, mientras que el plástico o la tela casi desaparecen.",
+  q:"En una radiografía, ¿qué sale más blanco: un plátano o una moneda?",a:"La moneda. El metal es mucho más denso que la fruta y frena más rayos X."},
+ {n:10,g:"curio",c:"--orange",code:"SACRO",t:"Radiología veterinaria",s:"Perros, gatos, aves, reptiles y caballos",
+  d:"Animales por dentro: anatomía comparada y curiosidades.",
+  dato:"Solo un año después del descubrimiento de los rayos X ya se radiografiaban animales: en este museo verás una rana con una fractura radiografiada en 1896.",
+  q:"Mira la serpiente del sello 16 de tu pasaporte. ¿Por qué parece una cremallera?",a:"Porque tiene muchísimas vértebras y costillas seguidas, una detrás de otra."},
+ {n:11,g:"curio",c:"--pink",code:"COCCIX",t:"La radiología como arte",s:"Formas, colores y patrones. Elige tu favorita",
+  d:"Imágenes médicas que parecen obras de arte por sus formas, colores o patrones.",
+  dato:"Las radiografías reales son en blanco, negro y grises. Los colores de las imágenes «artísticas», como las de nuestros carteles, se añaden después.",vote:true},
+ {n:12,g:"curio",c:"--cyan",code:"HUMERO",t:"Misterios radiológicos: ¿qué estoy viendo?",s:"Imágenes que parecen paisajes, galaxias u objetos",
+  d:"Imágenes sorprendentes que pueden parecer otra cosa. ¿Sabrías decir qué son?",
+  dato:"Un mismo hueso puede ser irreconocible solo con cambiar el ángulo. Una mano vista de lado parece un único dedo muy largo.",go:["juego","Jugar a ¿Qué es?"]},
+ {n:13,g:"curio",c:"--lime",code:"ESCAPULA",t:"¿Qué ha pasado aquí?",s:"Hallazgos y cuerpos extraños como enigmas",
+  d:"Casos curiosos, sin imágenes desagradables: objetos que han acabado donde no deberían.",
+  dato:"Los rayos X también ayudan a los veterinarios: así se localizó el anzuelo que se había tragado un cormorán.",go:["objetos","Ver ¿Qué hace esto ahí?"]},
+ {n:14,g:"curio",c:"--yellow",code:"CLAVICULA",t:"La radiología en el cine y la ficción",s:"Películas, series y videojuegos: ficción frente a realidad",
+  d:"Rayos X, resonancias y escáneres en la pantalla. ¿Qué es real y qué no?",
+  dato:"En las películas la resonancia suele ser silenciosa, pero en la vida real hace muchísimo ruido: golpes y zumbidos fuertes. Por eso al paciente se le dan cascos o tapones.",
+  q:"La «visión de rayos X» de los superhéroes, ¿podría existir?",a:"No. Los ojos no emiten rayos X: solo reciben luz. Y para hacer una radiografía hace falta un emisor a un lado y un detector al otro."},
+ {n:15,g:"curio",c:"--orange",code:"ESTERNON",t:"Cuando las imágenes engañan",s:"Artefactos por movimiento, metal, ruido o superposición",
+  d:"No todo lo que aparece en una imagen es una lesión.",
+  dato:"Un pendiente, un empaste o un piercing pueden llenar un TC de rayas brillantes. Se llaman artefactos, y los técnicos aprenden a reconocerlos.",
+  q:"Si el paciente se mueve durante la prueba, ¿qué le pasa a la imagen?",a:"Sale borrosa o con contornos dobles, como una foto movida. Por eso se pide estar quieto y, a veces, aguantar la respiración."},
+ {n:16,g:"curio",c:"--cyan",code:"MANDIBULA",t:"La imagen más allá del hospital",s:"Equipajes, arte, arqueología, industria y fósiles",
+  d:"Escáneres de equipaje, conservación de obras de arte, arqueología, industria y paleontología.",
+  dato:"Con rayos X se han descubierto cuadros escondidos debajo de otros cuadros: el pintor reutilizó el lienzo y la primera pintura quedó tapada.",
+  q:"¿Cómo se puede estudiar un fósil sin sacarlo de la roca?",a:"Con un TC. Las imágenes en 3D permiten ver el fósil dentro de la piedra sin romperla."}
+];
+const RED = new Set([8,11,12,14,15]);
+const ROUNDS = [
+ {img:"q-tobillo.webp",bg:"#04231f",ac:"--pink",opts:["Rodilla","Tobillo","Hombro","Cadera"],ok:1,
+  exp:"Es un tobillo de perfil: arriba baja la tibia y abajo se ve el calcáneo, el hueso del talón."},
+ {img:"q-mano.webp",bg:"#1d0a4a",ac:"--cyan",opts:["Columna vertebral","Pie de perfil","Mano vista de lado","Cola de un gato"],ok:2,
+  exp:"Es una mano vista de lado. Al ponerla de perfil, los dedos se superponen y parecen uno solo."},
+ {img:"q-craneo.webp",bg:"#05305e",ac:"--yellow",opts:["Pelvis","Cráneo de perfil","Caja torácica","Rodilla"],ok:1,
+  exp:"Es un cráneo de perfil: se distinguen la cuenca del ojo, los dientes y la mandíbula."},
+ {img:"q-codo.webp",bg:"#3a0820",ac:"--yellow",opts:["Hombro","Rodilla","Tobillo","Codo"],ok:3,
+  exp:"Es un codo doblado: el húmero, el hueso del brazo, se une con los dos huesos del antebrazo, el cúbito y el radio."}
+];
+const OBJETOS = [
+ {img:"o-cormoran.webp",t:"Un anzuelo dentro de un cormorán",p:"Esta ave marina se tragó un anzuelo de pesca. La radiografía muestra exactamente dónde está para poder sacarlo."},
+ {img:"o-rana.webp",t:"Una rana con una fractura, 1896",p:"Una de las radiografías más antiguas que existen, hecha solo un año después del descubrimiento de los rayos X. Busca el hueso roto."},
+ {img:"o-monedas.webp",t:"Monedas de oro dentro de un hueso de vaca",p:"El hueso deja pasar parte de los rayos X, pero el oro los frena casi todos. Por eso las monedas salen tan blancas."},
+ {img:"o-gafas.webp",t:"Unas gafas, 1896",p:"En los primeros años todo el mundo quería radiografiar objetos. La montura de metal sale blanca; las lentes dejan pasar muchos más rayos."}
+];
+const VOTOS = [["s16.webp","La serpiente"],["s11.webp","El talón rojo"],["s8.webp","Las ramas"],["s14.webp","La sonrisa"]];
+
+/* ===== Estado (solo en este navegador) ===== */
+const KEY="museo-invisible-v1";
+let st={sellos:[],q1:"",q2:"",premio:"",voto:""};
+try{const raw=localStorage.getItem(KEY); if(raw) st=Object.assign(st,JSON.parse(raw));}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}};
+const $=s=>document.querySelector(s);
+const norm=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z]/gi,"").toUpperCase();
+const P=n=>PUESTOS.find(p=>p.n===n);
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ===== Navegación ===== */
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-go]"); if(!b) return;
+  e.preventDefault(); const t=document.getElementById(b.dataset.go);
+  if(t) t.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"});
+});
+
+/* ===== Sellos ===== */
+function stampHTML(n,on,fresh){
+  const red=RED.has(n), rot=((n*37)%15)-7;
+  return `<div class="stamp ${on?"on":""} ${red?"red":""} ${fresh?"fresh":""}" style="--rot:${rot}deg">
+    <div class="disc">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <defs><path id="r${n}${fresh?"m":""}" d="M50,50 m-40.5,0 a40.5,40.5 0 1,1 81,0 a40.5,40.5 0 1,1 -81,0"/></defs>
+        <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" stroke-width="2.4"/>
+        <text font-family="Inter,system-ui,sans-serif" font-weight="700" font-size="6.6" letter-spacing=".5" fill="currentColor">
+          <textPath href="#r${n}${fresh?"m":""}" textLength="248">DÍA DE LA RADIOLOGÍA · MUSEO DE LO INVISIBLE ·</textPath></text>
+      </svg>
+      <div class="img"><img src="img/s${n}.webp" alt="" loading="lazy"></div>
+      <span class="num">${n}</span>
+    </div>
+  </div>`;
+}
+function renderPassport(fresh){
+  const k=st.sellos.length;
+  $("#count").textContent=k; $("#pillCount").textContent=`${k}/16`;
+  $("#segs").innerHTML=Array.from({length:16},(_,i)=>`<i class="${i<k?"on":""}"></i>`).join("");
+  $("#stamps").innerHTML=PUESTOS.map(p=>{
+    const on=st.sellos.includes(p.n);
+    return `<li><button class="stamp-btn" data-p="${p.n}" style="background:none;border:0;padding:0;width:100%;display:grid;gap:6px;justify-items:center;color:inherit"
+      aria-label="Puesto ${p.n}: ${p.t}. ${on?"Sellado":"Sin sellar"}">${stampHTML(p.n,on,fresh===p.n)}<span class="cap" style="display:block">${p.n}. ${p.t}</span></button></li>`;
+  }).join("");
+  const done=k===16;
+  if(done&&!st.premio){st.premio="MI-"+String(1000+Math.floor(Math.random()*9000)); save();}
+  $("#prizeCard").className="card"+(done?"":" locked");
+  $("#prizeCard").innerHTML=done
+    ? `<h3>¡Pasaporte completo!</h3><p>Enseña esta pantalla en recepción para recoger tu premio sorpresa.</p><span class="code">${st.premio}</span>`
+    : `<h3>Premio sorpresa</h3><p>Te ${16-k===1?"falta 1 sello":`faltan ${16-k} sellos`}. Cuando tengas los 16, aquí aparecerá tu código para recoger el premio en recepción.</p>`;
+  document.querySelectorAll(".chip[data-p]").forEach(c=>{
+    const on=st.sellos.includes(+c.dataset.p); c.classList.toggle("on",on); c.textContent=on?"Sellado":"Sin sellar";
+  });
+}
+function stamp(n){
+  const p=P(n), had=st.sellos.includes(n);
+  if(!had){st.sellos.push(n); st.sellos.sort((a,b)=>a-b); save();}
+  renderPassport(had?null:n);
+  $("#mStamp").innerHTML=stampHTML(n,true,!reduce);
+  $("#mTitle").textContent=had?"Ya tenías este sello":"¡Sello conseguido!";
+  $("#mText").textContent=`Puesto ${n} · ${p.t}. Llevas ${st.sellos.length} de 16.`;
+  $("#modal").hidden=false; $("#mClose").focus();
+}
+$("#mClose").addEventListener("click",()=>{$("#modal").hidden=true; document.getElementById("pasaporte").scrollIntoView({behavior:reduce?"auto":"smooth"});});
+$("#modal").addEventListener("click",e=>{if(e.target.id==="modal") $("#modal").hidden=true;});
+document.addEventListener("keydown",e=>{if(e.key==="Escape") $("#modal").hidden=true;});
+
+$("#codeform").addEventListener("submit",e=>{
+  e.preventDefault();
+  const v=norm($("#code").value), msg=$("#msg");
+  if(!v){msg.className="msg bad"; msg.textContent="Escribe el código del puesto."; return;}
+  const p=PUESTOS.find(x=>x.code===v);
+  if(!p){msg.className="msg bad"; msg.textContent="Ese código no existe. Revisa cómo está escrito en el cartel del puesto."; return;}
+  msg.className="msg"; msg.textContent=""; $("#code").value=""; stamp(p.n);
+});
+$("#stamps").addEventListener("click",e=>{
+  const b=e.target.closest("[data-p]"); if(!b) return;
+  const d=document.getElementById("p"+b.dataset.p); if(!d) return;
+  d.open=true; d.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"});
+});
+
+/* Sellar al escanear un QR: enlace terminado en #sello-codigo */
+function fromHash(){
+  const m=location.hash.match(/^#sello-([a-z]+)$/i); if(!m) return;
+  const p=PUESTOS.find(x=>x.code===norm(m[1]));
+  if(p) stamp(p.n);
+  try{history.replaceState(null,"",location.pathname+location.search);}catch(e){}
+}
+addEventListener("hashchange",fromHash);
+
+/* Preguntas finales */
+let t; ["q1","q2"].forEach(id=>{
+  const el=$("#"+id); el.value=st[id]||"";
+  el.addEventListener("input",()=>{st[id]=el.value; clearTimeout(t); t=setTimeout(()=>{save(); $("#saved").textContent="Guardado en este móvil.";},400);});
+});
+
+/* Reiniciar */
+function resetUI(confirming){
+  $("#reset").innerHTML=confirming
+    ? `<span>Se borrarán tus sellos y respuestas de este móvil.</span><button type="button" class="danger" id="resetYes">Sí, borrar</button><button type="button" id="resetNo">Cancelar</button>`
+    : `<button type="button" id="resetAsk">Empezar el pasaporte de cero</button>`;
+}
+$("#reset").addEventListener("click",e=>{
+  if(e.target.id==="resetAsk") resetUI(true);
+  else if(e.target.id==="resetNo") resetUI(false);
+  else if(e.target.id==="resetYes"){st={sellos:[],q1:"",q2:"",premio:"",voto:""}; save(); $("#q1").value=""; $("#q2").value=""; resetUI(false); renderPassport(); renderVotes();}
+});
+
+/* ===== Juego ¿Qué es? ===== */
+let gi=0, score=0, answered=false;
+function renderGame(){
+  const g=$("#game"), sec=$("#juego");
+  if(gi>=ROUNDS.length){
+    sec.style.setProperty("--bg","#04231f"); sec.style.setProperty("--ac","var(--pink)");
+    g.innerHTML=`<div class="final"><p class="eyebrow">Resultado</p><p class="big">${score} de ${ROUNDS.length}</p>
+      <p class="sub">${score===ROUNDS.length?"Ojo de técnico. Lo has visto todo.":score>=2?"Nada mal. Lo invisible empieza a verse.":"Lo invisible se resiste. En el puesto 12 hay más misterios para practicar."}</p>
+      <div class="ctas"><button class="btn primary" id="again">Jugar otra vez</button><button class="btn ghost" data-go="puestos">Ir a los puestos</button></div></div>
+      <div class="shot"><img src="img/${ROUNDS[0].img}" alt="Radiografía de un tobillo coloreada"></div>`;
+    $("#again").onclick=()=>{gi=0;score=0;renderGame();};
+    return;
+  }
+  const r=ROUNDS[gi]; answered=false;
+  sec.style.setProperty("--bg",r.bg); sec.style.setProperty("--ac",`var(${r.ac})`);
+  g.innerHTML=`<div>
+      <div class="meta"><span>Ronda <b>${gi+1}</b> de ${ROUNDS.length}</span><span>Aciertos <b>${score}</b></span></div>
+      <h2>¿QUÉ ES?</h2>
+      <p class="sub">Míralo bien. Lo llevas contigo todos los días.</p>
+      <div class="opts">${r.opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join("")}</div>
+      <div id="fb"></div>
+    </div>
+    <div class="shot"><img src="img/${r.img}" alt="Radiografía misteriosa, ronda ${gi+1}"></div>`;
+  g.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+    if(answered) return; answered=true;
+    const i=+b.dataset.i, ok=i===r.ok; if(ok) score++;
+    g.querySelectorAll(".opt").forEach((x,j)=>{x.disabled=true; if(j===r.ok) x.classList.add("right"); else if(j===i) x.classList.add("wrong");});
+    $("#fb").innerHTML=`<div class="feedback"><b>${ok?"¡Bien visto!":"Casi. Era: "+r.opts[r.ok]}</b><p>${r.exp}</p>
+      <button class="btn" id="next">${gi+1<ROUNDS.length?"Siguiente imagen":"Ver resultado"}</button></div>`;
+    $("#next").onclick=()=>{gi++; renderGame();};
+    $("#next").focus({preventScroll:true});
+  });
+}
+
+/* ===== ¿Qué hace esto ahí? ===== */
+$("#flips").innerHTML=OBJETOS.map((o,i)=>`<button class="flip" aria-pressed="false" aria-label="Descubrir: imagen ${i+1}">
+  <div class="in"><div class="face front"><img src="img/${o.img}" alt="Radiografía misteriosa ${i+1}" loading="lazy"><span class="tag">¿Qué es esto? Toca para descubrirlo</span></div>
+  <div class="face back"><h3>${o.t}</h3><p>${o.p}</p></div></div></button>`).join("");
+$("#flips").addEventListener("click",e=>{const f=e.target.closest(".flip"); if(!f) return; const o=f.classList.toggle("open"); f.setAttribute("aria-pressed",o);});
+
+/* ===== Puestos ===== */
+function pItem(p){
+  const on=st.sellos.includes(p.n);
+  let extra="";
+  if(p.q) extra=`<div class="reto"><p class="eyebrow">Reto</p><p class="q">${p.q}</p>
+    <div class="flap"><p class="ans">${p.a}</p><button type="button">Levantar la solapa</button></div></div>`;
+  if(p.vote) extra=`<div class="reto"><p class="eyebrow">Vota</p><p class="q">¿Cuál es tu imagen favorita del museo?</p>
+    <div class="votes" id="votes"></div><p class="votemsg" id="votemsg"></p></div>`;
+  if(p.go) extra=`<button class="btn go" data-go="${p.go[0]}">${p.go[1]}</button>`;
+  return `<details class="p" id="p${p.n}" style="--c:var(${p.c})">
+    <summary><span class="pn">${p.n}</span><span class="pt"><b>${p.t}</b><span>${p.s}</span></span><span class="chip ${on?"on":""}" data-p="${p.n}">${on?"Sellado":"Sin sellar"}</span></summary>
+    <div class="pbody"><p>${p.d}</p><div class="dato"><p class="eyebrow">Dato que sorprende</p><p>${p.dato}</p></div>${extra}</div></details>`;
+}
+$("#groups").innerHTML=
+  `<div class="group"><h3>Puestos del ciclo</h3><div class="plist">${PUESTOS.filter(p=>p.g==="ciclo").map(pItem).join("")}</div></div>
+   <div class="group"><h3>Curiosidades y divulgación</h3><div class="plist">${PUESTOS.filter(p=>p.g==="curio").map(pItem).join("")}</div></div>`;
+$("#groups").addEventListener("click",e=>{
+  const fb=e.target.closest(".flap button"); if(fb){fb.parentElement.classList.add("open"); return;}
+  const v=e.target.closest(".vote"); if(v){st.voto=v.dataset.v; save(); renderVotes();}
+});
+function renderVotes(){
+  const box=$("#votes"); if(!box) return;
+  box.innerHTML=VOTOS.map(([img,name])=>`<button type="button" class="vote ${st.voto===name?"sel":""}" data-v="${name}" aria-pressed="${st.voto===name}"><img src="img/${img}" alt="" loading="lazy">${name}</button>`).join("");
+  $("#votemsg").textContent=st.voto?`Tu favorita: ${st.voto}. Díselo al equipo del puesto 11 para que lo sume al recuento.`:"Toca la que más te guste.";
+}
+
+/* ===== Escáner de la portada ===== */
+(function(){
+  const scan=$("#scan"), lens=$("#lens"), ring=$("#ring");
+  let touched=false;
+  const set=(x,y)=>{lens.style.setProperty("--x",x+"%"); lens.style.setProperty("--y",y+"%"); ring.style.left=x+"%"; ring.style.top=y+"%";};
+  const fit=()=>{const w=scan.clientWidth,h=scan.clientHeight; const r=Math.min(w,h)*.3; lens.style.setProperty("--r",r+"px"); ring.style.width=(r*2)+"px";};
+  fit(); addEventListener("resize",fit);
+  set(50,42);
+  scan.addEventListener("pointermove",e=>{touched=true; const b=scan.getBoundingClientRect(); set((e.clientX-b.left)/b.width*100,(e.clientY-b.top)/b.height*100);});
+  scan.addEventListener("pointerdown",e=>{touched=true; const b=scan.getBoundingClientRect(); set((e.clientX-b.left)/b.width*100,(e.clientY-b.top)/b.height*100);});
+  if(reduce) return;
+  const t0=performance.now();
+  (function loop(now){ if(touched) return; const s=(now-t0)/1000; set(50+24*Math.sin(s*.55),44+26*Math.sin(s*.8+1)); requestAnimationFrame(loop);})(t0);
+})();
+
+renderPassport(); renderVotes(); renderGame(); fromHash();
+</script>
+</body></html>
